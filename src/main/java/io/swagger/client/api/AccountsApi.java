@@ -32,6 +32,8 @@ import io.swagger.client.model.AccountDetailsDto;
 import io.swagger.client.model.PageOfAccountSearchModel;
 import io.swagger.client.model.ResponseIdModel;
 import io.swagger.client.model.RestApiErrorResponse;
+import org.springframework.stereotype.Service;
+
 import java.util.UUID;
 
 import java.lang.reflect.Type;
@@ -40,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class AccountsApi {
     private ApiClient apiClient;
 
