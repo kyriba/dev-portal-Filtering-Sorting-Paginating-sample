@@ -5,6 +5,27 @@
     <title>Title</title>
 </head>
 <body>
-<p th:text = "${result}">
+<h2>List of accounts</h2>
+<form th:action="@{/accounts/list}" method="post">
+    <p>
+    <label for = "activeStatus"> activeStatus </label>
+    <select id ="activeStatus" >
+        <option>--</option>
+        <option th:each = "status: ${activeStatus}" th:text = "${status}"></option>
+    </select>
+    </p>
+    <p>
+    <label for ="filter">filter</label>
+        <input id = "filter" type="text">
+    </p>
+    <p>
+        <label for = 'sort'>sortBy</label>
+            <select id = 'sort'>
+                <option>--</option>
+                <option th:each = "column: ${columns}" th:text = "${column}"></option>
+            </select>
+    </p>
+
+</form>
 </body>
 </html>
