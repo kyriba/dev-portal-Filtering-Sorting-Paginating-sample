@@ -2,30 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>AccountsAPI</title>
+    <link rel="stylesheet" th:href="@{/css/renderjson.css}">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.png}" />
 </head>
 <body>
 <h2>List of accounts</h2>
-<form th:action="@{/accounts/list}" method="post">
+<form id = "select_filters_form" method="post">
     <p>
     <label for = "activeStatus"> activeStatus </label>
-    <select id ="activeStatus" >
-        <option>--</option>
+    <select id ="activeStatus" name = "activeStatus">
+        <option value="">--</option>
         <option th:each = "status: ${activeStatus}" th:text = "${status}"></option>
     </select>
     </p>
     <p>
     <label for ="filter">filter</label>
-        <input id = "filter" type="text">
+        <select id = "filter">
+            <option>--</option>
+            <option th:each = "column: ${columns}" th:text = "${column}"></option>
+        </select>
+        <i  onclick="addField(this)" style="cursor: pointer; display: block; font-weight: bold">+</i>
+
+        <input id = "filterResult" name = "filter" hidden>
     </p>
     <p>
-        <label for = 'sort'>sortBy</label>
-            <select id = 'sort'>
-                <option>--</option>
+        <label for ="pageLimit">page.limit</label>
+        <input id = "pageLimit" name = "pageLimit" type="number" min="0" >
+    </p>
+    <p>
+        <label for ="pageOffset">page.offset</label>
+        <input id = "pageOffset" name = "pageOffset" type="number" min="0">
+    </p>
+    <p>
+        <p class = "sorting">
+        <label for = 'column_sort'>sortBy</label>
+            <select id = 'column_sort' name = "sort">
+                <option value="">--</option>
                 <option th:each = "column: ${columns}" th:text = "${column}"></option>
+                <option th:each = "column: ${columns}" th:text = "${'-' + column}" hidden></option>
             </select>
+        <select id="asc" onchange="setOrder(this)">
+            <option>ASC</option>
+            <option>DESC</option>
+        </select>
+<!--    <select id = "sort" name = "sort" hidden>-->
+<!--        <option value="">&#45;&#45;</option>-->
+<!--        <option th:each = "column: ${columns}" th:text = "${column}"></option>-->
+<!--        <option th:each = "column: ${columns}" th:text = "${'-' + column}"></option>-->
+<!--    </select>-->
+       <i  onclick="addField(this)" style="cursor: pointer; display: block; font-weight: bold">+</i>
+       <i  onclick="removeField(this)" style="cursor: pointer; display: none; font-weight: bold">-</i>
+       </p>
+
+
     </p>
 
+    <input value="GET" onclick="sendFilters()">
+
 </form>
+<script th:src = "@{/js/renderjson.js}"></script>
+<script th:src = "@{/js/accounts_list.js}">
+</script>
 </body>
 </html>

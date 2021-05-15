@@ -23,6 +23,9 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.client.model.Links;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.io.IOException;
 
 /**
@@ -37,9 +40,11 @@ public class Metadata {
   private Long numberOfTotalResults = null;
 
   @SerializedName("pageLimit")
+  @Min(value = 1, message = "must be greater than 0")
   private Integer pageLimit = null;
 
   @SerializedName("pageOffset")
+  @Min(value = 0, message = "must be not less than 0")
   private Integer pageOffset = null;
 
   @SerializedName("pageResults")

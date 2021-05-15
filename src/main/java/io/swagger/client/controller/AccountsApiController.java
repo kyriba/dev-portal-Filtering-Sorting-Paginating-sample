@@ -6,9 +6,10 @@ import io.swagger.client.model.PageOfAccountSearchModel;
 import io.swagger.client.service.AccountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/accounts")
@@ -26,10 +27,15 @@ public class AccountsApiController {
         return "accounts-list";
     }
 
-    @GetMapping(value = "/list")
+    @GetMapping("/list")
     @ResponseBody
-    public PageOfAccountSearchModel getAccountsJson(){
-        return accountService.getAllAccounts(null, null, null, null, null);
+    public PageOfAccountSearchModel getAccountsJson(@RequestParam (value = "activeStatus", required = false) String activeStatus,
+                                                    @RequestParam (value = "filter", required = false) String filter,
+                                                    @RequestParam (value = "pageLimit", required = false) Integer pageLimit,
+                                                    @RequestParam (value = "pageOffset", required = false) Integer pageOffset,
+                                                    @RequestParam(value = "sort", required = false) List<String> sort){
+
+        return accountService.getAllAccounts(activeStatus, filter, pageLimit, pageOffset, sort);
     }
 
 
