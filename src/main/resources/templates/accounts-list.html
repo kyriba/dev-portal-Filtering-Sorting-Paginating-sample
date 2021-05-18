@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>AccountsAPI</title>
     <link rel="stylesheet" th:href="@{/css/renderjson.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.png}" />
 </head>
 <body>
@@ -16,16 +17,36 @@
         <option th:each = "status: ${activeStatus}" th:text = "${status}"></option>
     </select>
     </p>
+    <div id = "filter_details">
     <p>
-    <label for ="filter">filter</label>
-        <select id = "filter">
+    <label for ="filter_column1" >filter</label>
+        <select id = "filter_column1" onchange="addInputField(this)">
             <option>--</option>
             <option th:each = "column: ${columns}" th:text = "${column}"></option>
         </select>
-        <i  onclick="addField(this)" style="cursor: pointer; display: block; font-weight: bold">+</i>
-
-        <input id = "filterResult" name = "filter" hidden>
+        <select id = "operation1" name = "operation">
+            <option value = "==">Equals</option>
+            <option value = "!=">Doesn't equal</option>
+            <option value = "=in=">In List</option>
+            <option value = "=out=">Isn't in List</option>
+            <option value = "==ABC*">Starts with</option>
+            <option value = "==*ABC">Ends with</option>
+            <option value = "==*ABC*">Contains</option>
+            <option value = "=lt="><</option>
+            <option value = "=gt=">></option>
+            <option value = "=le=">&#8804;</option>
+            <option value = "=ge=">&#8805;</option>
+        </select>
+        <input id = "addInput1" name = "addInput1" type="text">
+        <select id = "addFiltersBtn1" onchange="addFilters(this)">
+            <option>Add</option>
+            <option>AND</option>
+            <option>OR</option>
+        </select>
     </p>
+    <input id = "filter" name = "filter" hidden>
+    <input value="Apply" onclick="combineFilters()" class = "btn-info">
+    </div>
     <p>
         <label for ="pageLimit">page.limit</label>
         <input id = "pageLimit" name = "pageLimit" type="number" min="0" >
@@ -40,7 +61,7 @@
             <select id = 'column_sort' name = "sort">
                 <option value="">--</option>
                 <option th:each = "column: ${columns}" th:text = "${column}"></option>
-                <option th:each = "column: ${columns}" th:text = "${'-' + column}" hidden></option>
+                <option th:each = "column: ${columns}" th:text = "${column}" th:value = "'-' + ${column}" hidden></option>
             </select>
         <select id="asc" onchange="setOrder(this)">
             <option>ASC</option>
@@ -58,7 +79,8 @@
 
     </p>
 
-    <input value="GET" onclick="sendFilters()">
+    <input value="GET" onclick="sendFilters()" class = "btn-info">
+
 
 </form>
 <script th:src = "@{/js/renderjson.js}"></script>
