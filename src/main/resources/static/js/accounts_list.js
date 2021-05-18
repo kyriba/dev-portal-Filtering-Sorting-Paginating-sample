@@ -38,29 +38,24 @@ const sendFilters = () => {
                 })
         })
         .then(data => {
-            if (!document.querySelector('#responseList')) {
-                const json = document.createElement('div')
-                json.id = 'responseList'
-                renderjson.set_show_to_level('3')
-                document.body.append(json)
-                json.appendChild(renderjson(data))
-            } else {
-                document.querySelector('#responseList').firstChild.replaceWith(renderjson(data))
-            }
+           createJsonElement(data)
         })
         .catch(err => {
-            if (!document.querySelector('#responseList')) {
-                const json = document.createElement('div')
-                json.id = 'responseList'
-                renderjson.set_show_to_level('all')
-                document.body.append(json)
-                json.appendChild(renderjson(err.message))
-            } else {
-                document.querySelector('#responseList').firstChild.replaceWith(renderjson(JSON.parse(err.message)))
-            }
+            createJsonElement(JSON.parse(err.message))
         })
+}
 
-
+const createJsonElement = data => {
+    if (!document.querySelector('#responseList')) {
+        const main = document.querySelector('.main')
+        const json = document.createElement('div')
+        json.id = 'responseList'
+        renderjson.set_show_to_level('3')
+        document.body.append(json)
+        main.appendChild(json.appendChild(renderjson(data)))
+    } else {
+        document.querySelector('#responseList').firstChild.replaceWith(renderjson(data))
+    }
 }
 
 function addField(elem) {
@@ -177,12 +172,13 @@ const combineFilters = () => {
                 rsql = rsql + ' ' + fields[j].value.toLowerCase() + ' '
             }
         }
-        if (rsql.endsWith('and ')) {
-            rsql = rsql.slice(0, rsql.length - 4)
-        }
-        if (rsql.endsWith('or ')) {
-            rsql = rsql.slice(0, rsql.length - 3)
-        }
-        filter.value = rsql
+
     }
+    if (rsql.endsWith('and ')) {
+        rsql = rsql.slice(0, rsql.length - 4)
+    }
+    if (rsql.endsWith('or ')) {
+        rsql = rsql.slice(0, rsql.length - 3)
+    }
+    filter.value = rsql
 }

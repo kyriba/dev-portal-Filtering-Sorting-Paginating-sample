@@ -1,10 +1,11 @@
-.btn-info {
-    background-color: royalblue;
-    color: white;
-    width: 50px;
-    height: 24px;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
+
+.main{
+    height: auto;
+    margin-left: 100px;
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.request{
+    height: 34px;
 }

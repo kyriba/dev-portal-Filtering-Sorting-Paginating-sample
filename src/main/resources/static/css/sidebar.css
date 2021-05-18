@@ -1,0 +1,15 @@
+
+.sidebar {
+    width: 294px;
+    height: 998px;
+    margin-left: 0;
+    position: fixed;
+    background-color: #fafcf0;
+}
+
+.operation_name{
+    color: black;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+}
