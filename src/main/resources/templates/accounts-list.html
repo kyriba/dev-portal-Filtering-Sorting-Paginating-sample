@@ -5,86 +5,87 @@
     <title>AccountsAPI</title>
     <link rel="stylesheet" th:href="@{/css/renderjson.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.png}" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.png}"/>
 </head>
 <body>
-<h2>List of accounts</h2>
-<form id = "select_filters_form" method="post">
-    <p>
-    <label for = "activeStatus"> activeStatus </label>
-    <select id ="activeStatus" name = "activeStatus">
-        <option value="">--</option>
-        <option th:each = "status: ${activeStatus}" th:text = "${status}"></option>
-    </select>
-    </p>
-    <div id = "filter_details">
-    <p>
-    <label for ="filter_column1" >filter</label>
-        <select id = "filter_column1" onchange="addInputField(this)">
-            <option>--</option>
-            <option th:each = "column: ${columns}" th:text = "${column}"></option>
-        </select>
-        <select id = "operation1" name = "operation">
-            <option value = "==">Equals</option>
-            <option value = "!=">Doesn't equal</option>
-            <option value = "=in=">In List</option>
-            <option value = "=out=">Isn't in List</option>
-            <option value = "==ABC*">Starts with</option>
-            <option value = "==*ABC">Ends with</option>
-            <option value = "==*ABC*">Contains</option>
-            <option value = "=lt="><</option>
-            <option value = "=gt=">></option>
-            <option value = "=le=">&#8804;</option>
-            <option value = "=ge=">&#8805;</option>
-        </select>
-        <input id = "addInput1" name = "addInput1" type="text">
-        <select id = "addFiltersBtn1" onchange="addFilters(this)">
-            <option>Add</option>
-            <option>AND</option>
-            <option>OR</option>
-        </select>
-    </p>
-    <input id = "filter" name = "filter" hidden>
-    <input value="Apply" onclick="combineFilters()" class = "btn-info">
+<div id="sidebar" th:insert="sidebar"></div>
+<div class="container">
+    <div class="main">
+    <div class="panel panel-info request">
+        <div class="panel-body" style="background-color: #d9edf7; padding: 0">
+            <span class="btn btn-info">GET</span>
+            <span style="color: indianred">{{baseUrl}}</span>
+            /v1/accounts
+            <button onclick="sendFilters()" class="btn" style=" background-color: #1aa3ff; color: aliceblue; float: right">Send</button>
+        </div>
     </div>
-    <p>
-        <label for ="pageLimit">page.limit</label>
-        <input id = "pageLimit" name = "pageLimit" type="number" min="0" >
-    </p>
-    <p>
-        <label for ="pageOffset">page.offset</label>
-        <input id = "pageOffset" name = "pageOffset" type="number" min="0">
-    </p>
-    <p>
-        <p class = "sorting">
-        <label for = 'column_sort'>sortBy</label>
-            <select id = 'column_sort' name = "sort">
+    <form id="select_filters_form" method="post">
+        <p>
+            <label for="activeStatus"> activeStatus </label>
+            <select id="activeStatus" name="activeStatus">
                 <option value="">--</option>
-                <option th:each = "column: ${columns}" th:text = "${column}"></option>
-                <option th:each = "column: ${columns}" th:text = "${column}" th:value = "'-' + ${column}" hidden></option>
+                <option th:each="status: ${activeStatus}" th:text="${status}"></option>
             </select>
-        <select id="asc" onchange="setOrder(this)">
-            <option>ASC</option>
-            <option>DESC</option>
-        </select>
-<!--    <select id = "sort" name = "sort" hidden>-->
-<!--        <option value="">&#45;&#45;</option>-->
-<!--        <option th:each = "column: ${columns}" th:text = "${column}"></option>-->
-<!--        <option th:each = "column: ${columns}" th:text = "${'-' + column}"></option>-->
-<!--    </select>-->
-       <i  onclick="addField(this)" style="cursor: pointer; display: block; font-weight: bold">+</i>
-       <i  onclick="removeField(this)" style="cursor: pointer; display: none; font-weight: bold">-</i>
-       </p>
+        </p>
+        <div id="filter_details" style="border-style: initial">
+            <p>
+                <label for="filter_column1">filter</label>
+                <select id="filter_column1" onchange="addInputField(this)">
+                    <option>--</option>
+                    <option th:each="column: ${columns}" th:text="${column}"></option>
+                </select>
+                <select id="operation1" name="operation">
+                    <option value="==">Equals</option>
+                    <option value="!=">Doesn't equal</option>
+                    <option value="=in=">In List</option>
+                    <option value="=out=">Isn't in List</option>
+                    <option value="==ABC*">Starts with</option>
+                    <option value="==*ABC">Ends with</option>
+                    <option value="==*ABC*">Contains</option>
+                    <option value="=lt="><</option>
+                    <option value="=gt=">></option>
+                    <option value="=le=">&#8804;</option>
+                    <option value="=ge=">&#8805;</option>
+                </select>
+                <input id="addInput1" name="addInput1" type="text">
+                <select id="addFiltersBtn1" onchange="addFilters(this)">
+                    <option>Add</option>
+                    <option>AND</option>
+                    <option>OR</option>
+                </select>
+            </p>
+            <input id="filter" name="filter" hidden>
+            <input value="Apply" onclick="combineFilters()" class="btn-info">
+        </div>
+        <p>
+            <label for="pageLimit">page.limit</label>
+            <input id="pageLimit" name="pageLimit" type="number" min="0">
+        </p>
+        <p>
+            <label for="pageOffset">page.offset</label>
+            <input id="pageOffset" name="pageOffset" type="number" min="0">
+        </p>
+        <p>
+        <p class="sorting">
+            <label for='column_sort'>sortBy</label>
+            <select id='column_sort' name="sort">
+                <option value="">--</option>
+                <option th:each="column: ${columns}" th:text="${column}"></option>
+                <option th:each="column: ${columns}" th:text="${column}" th:value="'-' + ${column}" hidden></option>
+            </select>
+            <select id="asc" onchange="setOrder(this)">
+                <option>ASC</option>
+                <option>DESC</option>
+            </select>
+            <i onclick="addField(this)" style="cursor: pointer; display: block; font-weight: bold">+</i>
+            <i onclick="removeField(this)" style="cursor: pointer; display: none; font-weight: bold">-</i>
+        </p>
 
-
-    </p>
-
-    <input value="GET" onclick="sendFilters()" class = "btn-info">
-
-
-</form>
-<script th:src = "@{/js/renderjson.js}"></script>
-<script th:src = "@{/js/accounts_list.js}">
+    </form>
+    </div>
+</div>
+<script th:src="@{/js/renderjson.js}"></script>
+<script th:src="@{/js/accounts_list.js}">
 </script>
 </body>
 </html>
