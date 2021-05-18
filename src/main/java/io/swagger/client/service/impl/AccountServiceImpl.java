@@ -5,6 +5,7 @@ import io.swagger.client.ApiException;
 import io.swagger.client.Configuration;
 import io.swagger.client.JSON;
 import io.swagger.client.api.AccountsApi;
+import io.swagger.client.exception.BadRequestException;
 import io.swagger.client.model.PageOfAccountSearchModel;
 import io.swagger.client.service.AccountService;
 import org.apache.oltu.oauth2.client.OAuthClient;
@@ -71,7 +72,7 @@ public class AccountServiceImpl implements AccountService {
 //              AccountDetailsDto result = apiInstance.readAccountUsingGET3(UUID.fromString("123e4567-e89b-12d3-a456-426655440001"));
             System.out.println(result);
         } catch (ApiException e) {
-            System.out.println(e.getResponseBody());
+           throw new BadRequestException(e.getResponseBody());
         }
         return result;
     }
