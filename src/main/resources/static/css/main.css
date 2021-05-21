@@ -9,3 +9,19 @@
 .request{
     height: 34px;
 }
+
+.disable{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.add_sorting{
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.remove_sorting{
+    cursor: pointer;
+    display: none;
+    font-weight: bold;
+}
