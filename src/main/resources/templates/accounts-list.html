@@ -6,45 +6,57 @@
     <link rel="stylesheet" th:href="@{/css/renderjson.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/logo.png}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<div id="sidebar" th:insert="sidebar"></div>
+
 <div class="container">
-    <div class="main">
-        <div class="panel panel-info request">
-            <div class="panel-body" style="background-color: #d9edf7; padding: 0">
-                <span class="btn btn-info">GET</span>
-                <span style="color: indianred">{{baseUrl}}</span>
-                /v1/accounts
-                <button onclick="sendFilters()" class="btn"
-                        style=" background-color: #1aa3ff; color: aliceblue; float: right">Send
-                </button>
-            </div>
+    <div class="panel panel-info request">
+        <div class="panel-body" style="background-color: #d9edf7; padding: 0; user-select: none">
+            <span class="btn btn-info">GET</span>
+            Get all accounts
+            <button onclick="sendFilters()" class="btn"
+                    style=" background-color: #1aa3ff; color: aliceblue; float: right">Send
+            </button>
         </div>
-        <form id="select_filters_form" method="post" style="cursor: default">
-            <table class="table table-striped">
-                <thead>
-                <th>Parameter</th>
-                <th>Value</th>
-                </thead>
-                <tbody>
-                <tr>
-                    <td> activeStatus</td>
-                    <td>
-                        <select id="activeStatus" name="activeStatus">
-                            <option value="">--</option>
-                            <option th:each="status: ${activeStatus}" th:text="${status}"></option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td for="filter_column1">filter</td>
-                <td>
-                    <select id="filter_column1" onchange="addInputField(this)">
+    </div>
+    <form id="select_filters_form" method="post" style="user-select: none">
+        <button type="button" class="btn" onclick="resetForm()"
+                style=" background-color: #9feafc; color: white; float: right">Clear
+        </button>
+        <table class="table table-striped">
+            <thead>
+            <th>Parameter</th>
+            <th>Value</th>
+            </thead>
+            <tbody>
+            <!--                <tr>-->
+            <!--                    <td> activeStatus</td>-->
+            <!--                    <td>-->
+            <!--                        <select id="activeStatus" name="activeStatus">-->
+            <!--                            <option value="">&#45;&#45;</option>-->
+            <!--                            <option th:each="status: ${activeStatus}" th:text="${status}"></option>-->
+            <!--                        </select>-->
+            <!--                    </td>-->
+            <!--                </tr>-->
+            <tr class = "filtering">
+                <td>filter</td>
+                <td class="filter_detail">
+                    <select id="filter_column1">
                         <option>--</option>
                         <option th:each="column: ${columns}" th:text="${column}"></option>
                     </select>
-                    <select id="operation1" name="operation">
+                    <select id="operation1" name="operation" onchange="showList(this)">
                         <option value="==">Equals</option>
                         <option value="!=">Doesn't equal</option>
                         <option value="=in=">In List</option>
@@ -58,48 +70,59 @@
                         <option value="=ge=">&#8805;</option>
                     </select>
                     <input id="addInput1" name="addInput1" type="text">
-                    <select id="addFiltersBtn1" onchange="addFilters(this)">
+                    <select id="addFiltersBtn1" onchange="addFilters(this, true)">
                         <option>Add</option>
                         <option>AND</option>
                         <option>OR</option>
                     </select>
-                <input id="filter" name="filter" hidden>
+                    <i class="remove_filter" onclick="removeFilter(this)">-</i>
                 </td>
-                </tr>
-                <tr class = "sorting">
-                    <td>sortBy</td>
-                    <td>
-                        <select id='column_sort1' name="sort">
-                            <option value="">--</option>
-                            <option th:each="column: ${columns}" th:text="${column}"></option>
-                            <option th:each="column: ${columns}" th:text="${column}" th:value="'-' + ${column}"
-                                    hidden></option>
-                        </select>
-                        <select id="asc1">
-                            <option>ASC</option>
-                            <option>DESC</option>
-                        </select>
-                        <i onclick="addField(this)" class="add_sorting">+</i>
-                        <i onclick="removeField(this)" class="remove_sorting">-</i>
-                    </td>
-                </tr>
-                <tr>
+            </tr>
+            <input id="filter" name="filter" hidden>
+            <tr class="sorting">
+                <td>sortBy</td>
+                <td class = 'sort_detail'>
+                    <select id='column_sort1' name="sort">
+                        <option value="">--</option>
+                        <option th:each="column: ${columns}" th:text="${column}"></option>
+                        <option th:each="column: ${columns}" th:text="${column}" th:value="'-' + ${column}"
+                                hidden></option>
+                    </select>
+                    <select id="asc1" >
+                        <option>ASC</option>
+                        <option>DESC</option>
+                    </select>
+                    <i onclick="removeField(this)" class="remove_sorting">-</i>
+                    <i onclick="addField(this)" class="add_sorting">+</i>
+
+                </td>
+            </tr>
+            <tr>
                 <td>page.limit</td>
                 <td>
-                    <input id="pageLimit" name="pageLimit" type="number" min="0">
+                    <input id="pageLimit" name="page.limit" type="number" min="0" placeholder="100">
                 </td>
-                </tr>
-                <tr>
-                    <td>page.offset</td>
+            </tr>
+            <tr>
+                <td>page.offset</td>
                 <td>
-                    <input id="pageOffset" name="pageOffset" type="number" min="0">
+                    <input id="pageOffset" name="page.offset" type="number" min="0" placeholder="0">
                 </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon3">cURL</span>
+        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+               th:value="${baseUrl + '/v1/accounts'}">
+    </div>
 </div>
-</div>
+<script th:inline="javascript">
+    const types = [[${accountTypes}]]
+    const statuses = [[${activeStatus}]]
+</script>
+<script th:src = "@{/js/uri.js}"></script>
 <script th:src="@{/js/renderjson.js}"></script>
 <script th:src="@{/js/accounts_list.js}">
 </script>

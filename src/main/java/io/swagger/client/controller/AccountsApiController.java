@@ -27,6 +27,8 @@ public class AccountsApiController {
     public String getAccounts(Model model){
         model.addAttribute("activeStatus", AccountSearchModel.ActiveStatusEnum.values());
         model.addAttribute("columns", ColumnsForSortingAndFiltering.values());
+        model.addAttribute("baseUrl", accountService.getBaseUrl());
+        model.addAttribute("accountTypes", AccountSearchModel.AccountTypeEnum.values());
         return "accounts-list";
     }
 
@@ -34,8 +36,8 @@ public class AccountsApiController {
     @ResponseBody
     public ResponseEntity<PageOfAccountSearchModel> getAccountsJson(@RequestParam (value = "activeStatus", required = false) String activeStatus,
                                                                    @RequestParam (value = "filter", required = false) String filter,
-                                                                   @RequestParam (value = "pageLimit", required = false) Integer pageLimit,
-                                                                   @RequestParam (value = "pageOffset", required = false) Integer pageOffset,
+                                                                   @RequestParam (value = "page.limit", required = false) Integer pageLimit,
+                                                                   @RequestParam (value = "page.offset", required = false) Integer pageOffset,
                                                                    @RequestParam(value = "sort", required = false) List<String> sort)
     throws BadRequestException {
 

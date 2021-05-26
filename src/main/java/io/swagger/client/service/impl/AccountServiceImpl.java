@@ -40,7 +40,6 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    @Retryable(value = InvalidTokenException.class, maxAttempts = 2)
     public PageOfAccountSearchModel getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) {
         PageOfAccountSearchModel result = null;
         try {
@@ -48,6 +47,7 @@ public class AccountServiceImpl implements AccountService {
         } catch (ApiException e) {
             if (e.getResponseBody().contains("invalid_token")) {
                 refreshToken();
+                return getAllAccounts(activeStatus, filter, pageLimit, pageOffset,  sort);
             }
             else
                 throw new BadRequestException(e.getResponseBody());
@@ -78,7 +78,7 @@ public class AccountServiceImpl implements AccountService {
 
             OAuthAccessTokenResponse token = client.accessToken(request, OAuth.HttpMethod.POST, OAuthJSONAccessTokenResponse.class);
             String accessToken = token.getAccessToken();
-            System.out.println(token.getBody() + "\n");
+            System.out.println(token.getBody());
             ApiClient defaultClient = Configuration.getDefaultApiClient();
             io.swagger.client.auth.OAuth OAuth2ClientCredentials = (io.swagger.client.auth.OAuth) defaultClient.getAuthentication("OAuth2ClientCredentials");
             OAuth2ClientCredentials.setAccessToken(accessToken);
@@ -88,4 +88,8 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+    @Override
+    public String getBaseUrl() {
+        return accountsApi.getApiClient().getBasePath();
+    }
 }
