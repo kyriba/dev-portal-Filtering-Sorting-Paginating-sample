@@ -16,25 +16,24 @@ package io.swagger.client.api;
 import io.swagger.client.ApiException;
 import io.swagger.client.model.Account;
 import io.swagger.client.model.AccountDetailsDto;
-import io.swagger.client.model.PageOfAccountSearchModel;
+import io.swagger.client.model.PageOfSearchModels;
 import io.swagger.client.model.ResponseIdModel;
-import io.swagger.client.model.RestApiErrorResponse;
+
 import java.util.UUID;
 import org.junit.Test;
 import org.junit.Ignore;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * API tests for AccountsApi
  */
 @Ignore
-public class AccountsApiTest {
+public class AccountsApiTest<T> {
 
-    private final AccountsApi api = new AccountsApi();
+     @Autowired
+    private  AccountsApi<T> api;
 
     
     /**
@@ -96,7 +95,7 @@ public class AccountsApiTest {
     @Test
     public void readAccountUsingGET1Test() throws ApiException {
         String code = null;
-        AccountDetailsDto response = api.readAccountUsingGET1(code);
+        T response = api.readAccountUsingGET1(code);
 
         // TODO: test validations
     }
@@ -132,7 +131,7 @@ public class AccountsApiTest {
         Integer pageLimit = null;
         Integer pageOffset = null;
         List<String> sort = null;
-        PageOfAccountSearchModel response = api.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
+        T response = api.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
 
         // TODO: test validations
     }

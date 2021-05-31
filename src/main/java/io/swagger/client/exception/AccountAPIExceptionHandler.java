@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class AccountAPIExceptionHandler {
 
 
-    @ExceptionHandler(value = BadRequestException.class)
-    public ResponseEntity<BadRequestException> getErrorResponse(BadRequestException e){
-        return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-    }
+//    @ExceptionHandler(value = BadRequestException.class)
+//    public ResponseEntity<BadRequestException> getErrorResponse(BadRequestException e){
+//        return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+//    }
 }
