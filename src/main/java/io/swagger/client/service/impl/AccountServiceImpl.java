@@ -5,7 +5,7 @@ import io.swagger.client.ApiException;
 import io.swagger.client.api.AccountsApi;
 import io.swagger.client.exception.BadRequestException;
 import io.swagger.client.exception.InvalidTokenException;
-import io.swagger.client.model.PageOfSearchModels;
+import io.swagger.client.model.PageOfAccountSearchModel;
 import io.swagger.client.service.AccountService;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
@@ -23,9 +23,9 @@ import java.util.Base64;
 import java.util.List;
 
 @Service
-public class AccountServiceImpl<T> implements AccountService<T> {
+public class AccountServiceImpl implements AccountService {
 
-    private final AccountsApi<T> accountsApi;
+    private final AccountsApi accountsApi;
     @Value("${url.token}")
     String tokenUrl;
     @Value("${client.id}")
@@ -34,7 +34,7 @@ public class AccountServiceImpl<T> implements AccountService<T> {
     String clientSecret;
 
 
-    public AccountServiceImpl(@Qualifier("accountsApi") AccountsApi<T> accountsApi) {
+    public AccountServiceImpl(@Qualifier("accountsApi") AccountsApi accountsApi) {
         this.accountsApi = accountsApi;
     }
 
@@ -45,8 +45,8 @@ public class AccountServiceImpl<T> implements AccountService<T> {
 
 
     @Override
-    public T getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) {
-        T result;
+    public PageOfAccountSearchModel getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) {
+        PageOfAccountSearchModel result;
         try {
             result = accountsApi.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
         } catch (InvalidTokenException e) {

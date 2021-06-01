@@ -25,21 +25,20 @@ import java.util.Objects;
  * PageOfSearchModels
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
-public class PageOfSearchModels<T> implements Serializable {
+public class PageOfAccountSearchModel {
     @SerializedName("metadata")
     private Metadata metadata = null;
 
     @SerializedName("results")
-    private List<T> results = null;
+    private List<AccountSearchModel> results = null;
 
-    public PageOfSearchModels metadata(Metadata metadata) {
+    public PageOfAccountSearchModel metadata(Metadata metadata) {
         this.metadata = metadata;
         return this;
     }
 
     /**
      * Get metadata
-     *
      * @return metadata
      **/
     @ApiModelProperty(value = "")
@@ -51,14 +50,14 @@ public class PageOfSearchModels<T> implements Serializable {
         this.metadata = metadata;
     }
 
-    public PageOfSearchModels results(List<T> results) {
+    public PageOfAccountSearchModel results(List<AccountSearchModel> results) {
         this.results = results;
         return this;
     }
 
-    public PageOfSearchModels<T> addResultsItem(T resultsItem) {
+    public PageOfAccountSearchModel addResultsItem(AccountSearchModel resultsItem) {
         if (this.results == null) {
-            this.results = new ArrayList<T>();
+            this.results = new ArrayList<AccountSearchModel>();
         }
         this.results.add(resultsItem);
         return this;
@@ -66,15 +65,14 @@ public class PageOfSearchModels<T> implements Serializable {
 
     /**
      * Get results
-     *
      * @return results
      **/
     @ApiModelProperty(value = "")
-    public List<T> getResults() {
+    public List<AccountSearchModel> getResults() {
         return results;
     }
 
-    public void setResults(List<T> results) {
+    public void setResults(List<AccountSearchModel> results) {
         this.results = results;
     }
 
@@ -87,9 +85,9 @@ public class PageOfSearchModels<T> implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PageOfSearchModels pageOfSearchModels = (PageOfSearchModels) o;
-        return Objects.equals(this.metadata, pageOfSearchModels.metadata) &&
-                Objects.equals(this.results, pageOfSearchModels.results);
+        PageOfAccountSearchModel pageOfAccountSearchModel = (PageOfAccountSearchModel) o;
+        return Objects.equals(this.metadata, pageOfAccountSearchModel.metadata) &&
+                Objects.equals(this.results, pageOfAccountSearchModel.results);
     }
 
     @Override
@@ -101,7 +99,8 @@ public class PageOfSearchModels<T> implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PageOfSearchModel {\n");
+        sb.append("class PageOfAccountSearchModel {\n");
+
         sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
         sb.append("    results: ").append(toIndentedString(results)).append("\n");
         sb.append("}");
@@ -112,7 +111,7 @@ public class PageOfSearchModels<T> implements Serializable {
      * Convert the given object to string with each line indented by 4 spaces
      * (except the first line).
      */
-    private String toIndentedString(Object o) {
+    private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
@@ -120,4 +119,3 @@ public class PageOfSearchModels<T> implements Serializable {
     }
 
 }
-
