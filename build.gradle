@@ -1,0 +1,43 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.6'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'application'
+
+mainClassName = 'io.swagger.client.AccountsApiApp'
+
+jar { archiveBaseName="api-client"}
+
+repositories {
+	mavenLocal()
+	maven {
+		url = uri("https://repo.maven.apache.org/maven2/")
+	}
+}
+
+dependencies {
+	implementation("org.apache.maven.plugins:maven-dependency-plugin:3.1.2")
+	implementation("org.springframework.boot:spring-boot-starter-web:2.3.10.RELEASE")
+	implementation("org.springframework.boot:spring-boot-starter-parent:2.3.10.RELEASE")
+	implementation("org.thymeleaf:thymeleaf:3.0.12.RELEASE")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.3.10.RELEASE")
+	implementation("io.swagger:swagger-annotations:1.5.24")
+	implementation("com.squareup.okhttp:okhttp:2.7.5")
+	implementation("com.squareup.okhttp:logging-interceptor:2.7.5")
+	implementation("com.google.code.gson:gson:2.8.1")
+	implementation("io.gsonfire:gson-fire:1.8.3")
+	implementation("org.threeten:threetenbp:1.4.1")
+	implementation("org.apache.maven.plugins:maven-gpg-plugin:3.0.1")
+	implementation("org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:0.31")
+	implementation("org.apache.oltu.oauth2:org.apache.oltu.oauth2.common:0.31")
+	implementation("javax.validation:validation-api:2.0.1.Final")
+	implementation("commons-logging:commons-logging:1.2")
+	testImplementation("org.springframework.boot:spring-boot-starter-test:2.3.10.RELEASE")
+	testImplementation("junit:junit:4.13.1")
+}
+
+group = "io.swagger"
+version = "1.0.0"
+description = "swagger-java-client"
