@@ -2,33 +2,9 @@ const sendFilters = () => {
     const fields = ['sort', 'activeStatus', 'filter', 'page.limit', 'page.offset']
     const form = document.querySelector('#select_filters_form')
     let url = '/accounts/list?'
-    // const params = form.elements;
-    // for (let i = 0; i < params.length; i++) {
-    //     if (params[i].getAttribute('name') === 'sort') {
-    //         if (params[i].nextElementSibling.value === 'DESC' && !params[i].value.startsWith('-'))
-    //             params[i].value = '-' + params[i].value
-    //         if (params[i].nextElementSibling.value === 'ASC' && params[i].value.startsWith('-'))
-    //             params[i].value = params[i].value.slice(1)
-    //     }
-    //     if (params[i].getAttribute('name') === 'filter') {
-    //         params[i].value = combineFilters()
-    //     }
-    //     if (params[i].value && fields.includes(params[i].getAttribute('name'))) {
-    //         if (url.endsWith('?')) {
-    //             url = url + params[i].getAttribute('name') + '=' + params[i].value
-    //         } else {
-    //             url = url + '&' + params[i].getAttribute('name') + '=' + params[i].value
-    //         }
-    //     }
-    // }
-    // if (url.endsWith('?')) {
-    //     url = url.replace('?', '')
-    // }
-    //
-    // if (url.endsWith('?'))
-    //     url.replace('?', '')
 
-    let curl = new URL('http://localhost:8060/accounts/list')
+
+    let curl = new URL('http://localhost:' + port + '/accounts/list')
     curl.search = uri.search
     sendRequestToGetAccounts(curl)
     // sendRequestToGetAccounts(url)
@@ -108,7 +84,6 @@ const createPagination = (url, pages, currentPage) => {
             sendRequestToGetAccounts(urlPrev)
     }
 
-    // const urlNext = updateQueryStringParameter(url, 'page.offset', currentPage)
     let urlNext = url
     urlNext.searchParams.set('page.offset', currentPage.toString())
     next.onclick = () => {
@@ -121,7 +96,7 @@ const createPagination = (url, pages, currentPage) => {
         let li = document.createElement('li')
         let a = document.createElement('a')
         li.appendChild(a)
-        //let urlCurrent = updateQueryStringParameter(url, 'page.offset', i - 1)
+
         url.searchParams.set('page.offset', (i - 1).toString())
         let urlCurrent = url
         li.onclick = () => sendRequestToGetAccounts(urlCurrent)
@@ -147,18 +122,9 @@ const createPagination = (url, pages, currentPage) => {
         })
 }
 
-// function updateQueryStringParameter(uri, key, value) {
-//     const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i")
-//     const separator = uri.toString().indexOf('?') !== -1 ? "&" : "?"
-//     if (uri.match(re)) {
-//         return uri.toString().replace(re, '$1' + key + "=" + value + '$2')
-//     } else {
-//         return uri.toString() + separator + key + "=" + value
-//     }
-// }
 
 
-function addField(elem) {
+const  addField = (elem) => {
     elem.style.display = 'none'
     let minus = elem.previousElementSibling
     minus.style.display = 'inline'
@@ -267,9 +233,9 @@ const addInputField = (el) => {
 
 const showList = (el) => {
     let input = el.nextElementSibling
-    input.setAttribute('placeholder', '')
+    input.value = ''
     if (el.value === '=in=' || el.value === '=out=') {
-        input.setAttribute('placeholder', '(value1,value2,...,valueN)')
+        input.value = '()'
     }
 }
 

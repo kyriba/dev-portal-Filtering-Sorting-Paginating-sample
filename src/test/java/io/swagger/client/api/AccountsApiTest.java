@@ -16,7 +16,7 @@ package io.swagger.client.api;
 import io.swagger.client.ApiException;
 import io.swagger.client.model.Account;
 import io.swagger.client.model.AccountDetailsDto;
-import io.swagger.client.model.PageOfSearchModels;
+import io.swagger.client.model.PageOfAccountSearchModel;
 import io.swagger.client.model.ResponseIdModel;
 
 import java.util.UUID;
@@ -131,7 +131,7 @@ public class AccountsApiTest<T> {
         Integer pageLimit = null;
         Integer pageOffset = null;
         List<String> sort = null;
-        T response = api.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
+        PageOfAccountSearchModel response = api.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
 
         // TODO: test validations
     }

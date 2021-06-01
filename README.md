@@ -32,6 +32,8 @@ Example:
 set BASE_URL=*******
 ```
 
+or they can be set up in the file ..\..\src\main\resources\application.
+
 And execute jar file: 
 
 ```shell
@@ -41,4 +43,6 @@ java -jar "localPath/build/libs/swagger-java-client-1.0.0.jar"
 Instead of "localPath" input your local directory to the project together with project name.
 
 
-If everything is made properly you can reach the page localhost:8080/accounts
+If everything has been made properly you can reach the page localhost:8080/accounts.
+
+By default, there is used port 8080, and it can be change in file ..\..\src\main\resources\application.

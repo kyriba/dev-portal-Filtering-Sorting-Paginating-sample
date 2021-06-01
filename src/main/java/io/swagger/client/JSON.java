@@ -13,17 +13,16 @@
 
 package io.swagger.client;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapter;
 import com.google.gson.internal.bind.util.ISO8601Utils;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.google.gson.JsonElement;
 import io.gsonfire.GsonFireBuilder;
 import io.gsonfire.TypeSelector;
-import org.springframework.core.ResolvableType;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
@@ -37,7 +36,9 @@ import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.ParsePosition;
-import java.util.*;
+import java.util.Date;
+import java.util.Map;
+import java.util.HashMap;
 
 public class JSON {
     private Gson gson;
@@ -50,7 +51,7 @@ public class JSON {
 
     public static GsonBuilder createGson() {
         GsonFireBuilder fireBuilder = new GsonFireBuilder()
-        ;
+                ;
         GsonBuilder builder = fireBuilder.createGsonBuilder();
         return builder;
     }
@@ -71,15 +72,14 @@ public class JSON {
         return clazz;
     }
 
-
     public JSON() {
         gson = createGson()
-            .registerTypeAdapter(Date.class, dateTypeAdapter)
-            .registerTypeAdapter(java.sql.Date.class, sqlDateTypeAdapter)
-            .registerTypeAdapter(OffsetDateTime.class, offsetDateTimeTypeAdapter)
-            .registerTypeAdapter(LocalDate.class, localDateTypeAdapter)
-            .registerTypeAdapter(byte[].class, byteArrayAdapter)
-            .create();
+                .registerTypeAdapter(Date.class, dateTypeAdapter)
+                .registerTypeAdapter(java.sql.Date.class, sqlDateTypeAdapter)
+                .registerTypeAdapter(OffsetDateTime.class, offsetDateTimeTypeAdapter)
+                .registerTypeAdapter(LocalDate.class, localDateTypeAdapter)
+                .registerTypeAdapter(byte[].class, byteArrayAdapter)
+                .create();
     }
 
     /**
@@ -114,9 +114,7 @@ public class JSON {
      * @return String representation of the JSON
      */
     public String serialize(Object obj) {
-        System.out.println(ResolvableType.forClass(obj.getClass()));
-        System.out.println((Type)ResolvableType.forClass(obj.getClass()).getClass());
-        return gson.toJson(obj, (Type) ResolvableType.forClass(obj.getClass()));
+        return gson.toJson(obj);
     }
 
     /**
