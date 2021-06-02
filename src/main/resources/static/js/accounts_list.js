@@ -77,29 +77,31 @@ const createPagination = (url, pages, currentPage) => {
     const next = pagination.querySelector('#nextPage')
 
     // const urlPrev = updateQueryStringParameter(url, 'page.offset', currentPage - 2)
-    let urlPrev = url
-    urlPrev.searchParams.set('page.offset', (currentPage - 2).toString())
+    let urlPrev = new URL(url)
+    urlPrev.searchParams.set('page.offset', currentPage - 2)
     prev.onclick = () => {
         if (!prev.classList.contains('disable'))
             sendRequestToGetAccounts(urlPrev)
     }
 
-    let urlNext = url
-    urlNext.searchParams.set('page.offset', currentPage.toString())
+    let urlNext = new URL(url)
+    urlNext.searchParams.set('page.offset', currentPage)
     next.onclick = () => {
         if (!next.classList.contains('disable'))
             sendRequestToGetAccounts(urlNext)
     }
+
+    let currentUrl = []
 
     for (let i = pages; i > 0; i--) {
 
         let li = document.createElement('li')
         let a = document.createElement('a')
         li.appendChild(a)
+        currentUrl[i] = new URL(url)
+        currentUrl[i].searchParams.set('page.offset', (i - 1).toString())
 
-        url.searchParams.set('page.offset', (i - 1).toString())
-        let urlCurrent = url
-        li.onclick = () => sendRequestToGetAccounts(urlCurrent)
+        li.onclick = () => sendRequestToGetAccounts(currentUrl[i])
         a.innerText = i.toString()
         prev.after(li)
         if (currentPage === i) {
