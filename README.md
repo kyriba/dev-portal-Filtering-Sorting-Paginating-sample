@@ -32,6 +32,7 @@ set BASE_URL=*******
 or they can be set up in the file ..\..\src\main\resources\application.
 
 ###One way 
+
 Build project:
 ```shell
 gradle build
@@ -46,6 +47,7 @@ java -jar "localPath\build\libs\swagger-java-client-1.0.0.jar"
 Instead of "localPath" input your local directory to the project together with project name.
 
 ###Another way
+
 Install gradle wrapper:
 
 ```shell
