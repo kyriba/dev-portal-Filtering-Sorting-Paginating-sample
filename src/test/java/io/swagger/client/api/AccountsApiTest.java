@@ -30,10 +30,10 @@ import java.util.List;
  * API tests for AccountsApi
  */
 @Ignore
-public class AccountsApiTest<T> {
+public class AccountsApiTest{
 
      @Autowired
-    private  AccountsApi<T> api;
+    private  AccountsApi api;
 
     
     /**
@@ -95,7 +95,7 @@ public class AccountsApiTest<T> {
     @Test
     public void readAccountUsingGET1Test() throws ApiException {
         String code = null;
-        T response = api.readAccountUsingGET1(code);
+        PageOfAccountSearchModel response = api.readAccountUsingGET1(code);
 
         // TODO: test validations
     }
