@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class AccountsApi<T> {
+public class AccountsApi {
     private ApiClient apiClient;
 
     @Value("${request.mapping}")
@@ -516,8 +516,8 @@ public class AccountsApi<T> {
      * @return AccountDetailsDto
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public T readAccountUsingGET1(String code) throws ApiException {
-        ApiResponse<T> resp = readAccountUsingGET1WithHttpInfo(code);
+    public PageOfAccountSearchModel readAccountUsingGET1(String code) throws ApiException {
+        ApiResponse<PageOfAccountSearchModel> resp = readAccountUsingGET1WithHttpInfo(code);
         return resp.getData();
     }
 
@@ -528,7 +528,7 @@ public class AccountsApi<T> {
      * @return ApiResponse&lt;AccountDetailsDto&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<T> readAccountUsingGET1WithHttpInfo(String code) throws ApiException {
+    public ApiResponse<PageOfAccountSearchModel> readAccountUsingGET1WithHttpInfo(String code) throws ApiException {
         com.squareup.okhttp.Call call = readAccountUsingGET1ValidateBeforeCall(code, null, null);
         Type localVarReturnType = new TypeToken<AccountDetailsDto>() {
         }.getType();
@@ -801,7 +801,7 @@ public class AccountsApi<T> {
      */
     public ApiResponse<PageOfAccountSearchModel> readAccountsUsingGET1WithHttpInfo(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
         com.squareup.okhttp.Call call = readAccountsUsingGET1ValidateBeforeCall(activeStatus, filter, pageLimit, pageOffset, sort, null, null);
-        Type localVarReturnType = new TypeToken<T>() {
+        Type localVarReturnType = new TypeToken<PageOfAccountSearchModel>() {
         }.getType();
         return apiClient.execute(call, localVarReturnType);
     }
