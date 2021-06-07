@@ -56,7 +56,7 @@ import java.util.regex.Pattern;
 
 @Component
 public class ApiClient {
-    @Value("${url.base}")
+    @Value("${base.url}")
     private String basePath;
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
@@ -906,6 +906,9 @@ public class ApiClient {
      */
     public <T> T handleResponse(Response response, Type returnType) throws ApiException {
         if (response.isSuccessful()) {
+
+                System.out.println(response.body());
+
             if (returnType == null || response.code() == 204) {
                 // returning null if the returnType is not defined,
                 // or the status code is 204 (No Content)

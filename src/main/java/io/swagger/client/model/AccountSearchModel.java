@@ -31,37 +31,19 @@ import org.threeten.bp.LocalDate;
  * Account search
  */
 @ApiModel(description = "Account search")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class AccountSearchModel {
-  @SerializedName("accountCategory1")
-  private ReferenceModel accountCategory1 = null;
 
-  @SerializedName("accountCategory2")
-  private ReferenceModel accountCategory2 = null;
+  @SerializedName("uuid")
+  private UUID uuid = null;
 
-  @SerializedName("accountCategory3")
-  private ReferenceModel accountCategory3 = null;
+  @SerializedName("code")
+  private String code = null;
 
-  @SerializedName("accountCategory4")
-  private ReferenceModel accountCategory4 = null;
+  @SerializedName("description")
+  private String description = null;
 
-  @SerializedName("accountCategory5")
-  private ReferenceModel accountCategory5 = null;
-
-  @SerializedName("accountCategory6")
-  private ReferenceModel accountCategory6 = null;
-
-  @SerializedName("accountCategory7")
-  private ReferenceModel accountCategory7 = null;
-
-  @SerializedName("accountCategory8")
-  private ReferenceModel accountCategory8 = null;
-
-  @SerializedName("accountCategory9")
-  private ReferenceModel accountCategory9 = null;
-
-  @SerializedName("accountCategory10")
-  private ReferenceModel accountCategory10 = null;
+  @SerializedName("description2")
+  private String description2 = null;
 
   /**
    * Account type
@@ -69,11 +51,11 @@ public class AccountSearchModel {
   @JsonAdapter(AccountTypeEnum.Adapter.class)
   public enum AccountTypeEnum {
     BANK_ACCOUNT("BANK_ACCOUNT"),
-    
+
     INTERCOMPANY_ACCOUNT("INTERCOMPANY_ACCOUNT"),
-    
+
     OTHER_ACCOUNT("OTHER_ACCOUNT"),
-    
+
     SHARED_ACCOUNT("SHARED_ACCOUNT");
 
     private String value;
@@ -117,61 +99,8 @@ public class AccountSearchModel {
   @SerializedName("accountType")
   private AccountTypeEnum accountType = null;
 
-  /**
-   * Account status.
-   */
-  @JsonAdapter(ActiveStatusEnum.Adapter.class)
-  public enum ActiveStatusEnum {
-    OPENED("OPENED"),
-    
-    CLOSED("CLOSED");
-
-    private String value;
-
-    ActiveStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ActiveStatusEnum fromValue(String text) {
-      for (ActiveStatusEnum b : ActiveStatusEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-    public static class Adapter extends TypeAdapter<ActiveStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ActiveStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ActiveStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value = jsonReader.nextString();
-        return ActiveStatusEnum.fromValue(String.valueOf(value));
-      }
-    }
-  }
-
-  @SerializedName("activeStatus")
-  private ActiveStatusEnum activeStatus = null;
-
-  @SerializedName("attachments")
-  private Boolean attachments = null;
-
-  @SerializedName("banCode")
-  private String banCode = null;
+  @SerializedName("company")
+  private ReferenceModel company = null;
 
   @SerializedName("bank")
   private ReferenceModel bank = null;
@@ -182,65 +111,50 @@ public class AccountSearchModel {
   @SerializedName("branchDescription")
   private String branchDescription = null;
 
-  @SerializedName("calendar")
-  private ReferenceModel calendar = null;
-
-  @SerializedName("closedAccount")
-  private Boolean closedAccount = null;
-
-  @SerializedName("closingDate")
-  private LocalDate closingDate = null;
-
-  @SerializedName("code")
-  private String code = null;
-
-  @SerializedName("company")
-  private ReferenceModel company = null;
+  @SerializedName("currency")
+  private ReferenceModel currency = null;
 
   @SerializedName("countryCode")
   private String countryCode = null;
 
-  @SerializedName("creationDate")
-  private LocalDate creationDate = null;
+  @SerializedName("ibanCode")
+  private String ibanCode = null;
 
-  @SerializedName("currency")
-  private ReferenceModel currency = null;
+  @SerializedName("banCode")
+  private String banCode = null;
 
-  @SerializedName("defaultGroup")
-  private ReferenceModel defaultGroup = null;
+  @SerializedName("statementIdentifier")
+  private String statementIdentifier = null;
 
-  @SerializedName("description")
-  private String description = null;
-
-  @SerializedName("description2")
-  private String description2 = null;
-
-  @SerializedName("documents")
-  private Boolean documents = null;
+  @SerializedName("zbaIdentifier")
+  private String zbaIdentifier = null;
 
   @SerializedName("glAccount")
   private ReferenceModel glAccount = null;
 
-  @SerializedName("ibanCode")
-  private String ibanCode = null;
-
   @SerializedName("internalAccountCode")
   private String internalAccountCode = null;
 
-  @SerializedName("marker1")
-  private Boolean marker1 = null;
-
-  @SerializedName("marker2")
-  private Boolean marker2 = null;
-
-  @SerializedName("marker3")
-  private Boolean marker3 = null;
+  @SerializedName("calendar")
+  private ReferenceModel calendar = null;
 
   @SerializedName("signatoryUsers")
   private Long signatoryUsers = null;
 
-  @SerializedName("statementIdentifier")
-  private String statementIdentifier = null;
+  @SerializedName("documents")
+  private Boolean documents = null;
+
+  @SerializedName("closedAccount")
+  private Boolean closedAccount = null;
+
+  @SerializedName("creationDate")
+  private LocalDate creationDate = null;
+
+  @SerializedName("updateDate")
+  private LocalDate updateDate = null;
+
+  @SerializedName("closingDate")
+  private LocalDate closingDate = null;
 
   /**
    * Account status
@@ -248,19 +162,19 @@ public class AccountSearchModel {
   @JsonAdapter(StatusEnum.Adapter.class)
   public enum StatusEnum {
     STANDARD("STANDARD"),
-    
+
     CREATION_TO_VALIDATE("CREATION_TO_VALIDATE"),
-    
+
     CREATION_VALIDATED("CREATION_VALIDATED"),
-    
+
     AVAILABLE_FOR_BANK_INTEGRATION("AVAILABLE_FOR_BANK_INTEGRATION"),
-    
+
     CLOSURE_REQUESTED("CLOSURE_REQUESTED"),
-    
+
     CLOSURE_VALIDATE("CLOSURE_VALIDATE"),
-    
+
     BANK_CONTRACT_TO_INACTIVATE("BANK_CONTRACT_TO_INACTIVATE"),
-    
+
     CLOSED("CLOSED");
 
     private String value;
@@ -304,14 +218,103 @@ public class AccountSearchModel {
   @SerializedName("status")
   private StatusEnum status = null;
 
-  @SerializedName("updateDate")
-  private LocalDate updateDate = null;
 
-  @SerializedName("uuid")
-  private UUID uuid = null;
+  @SerializedName("defaultGroup")
+  private ReferenceModel defaultGroup = null;
 
-  @SerializedName("zbaIdentifier")
-  private String zbaIdentifier = null;
+  @SerializedName("accountCategory1")
+  private ReferenceModel accountCategory1 = null;
+
+  @SerializedName("accountCategory2")
+  private ReferenceModel accountCategory2 = null;
+
+  @SerializedName("accountCategory3")
+  private ReferenceModel accountCategory3 = null;
+
+  @SerializedName("accountCategory4")
+  private ReferenceModel accountCategory4 = null;
+
+  @SerializedName("accountCategory5")
+  private ReferenceModel accountCategory5 = null;
+
+  @SerializedName("accountCategory6")
+  private ReferenceModel accountCategory6 = null;
+
+  @SerializedName("accountCategory7")
+  private ReferenceModel accountCategory7 = null;
+
+  @SerializedName("accountCategory8")
+  private ReferenceModel accountCategory8 = null;
+
+  @SerializedName("accountCategory9")
+  private ReferenceModel accountCategory9 = null;
+
+  @SerializedName("accountCategory10")
+  private ReferenceModel accountCategory10 = null;
+
+  @SerializedName("marker1")
+  private Boolean marker1 = null;
+
+  @SerializedName("marker2")
+  private Boolean marker2 = null;
+
+  @SerializedName("marker3")
+  private Boolean marker3 = null;
+
+  @SerializedName("attachments")
+  private Boolean attachments = null;
+
+
+  /**
+   * Account status.
+   */
+  @JsonAdapter(ActiveStatusEnum.Adapter.class)
+  public enum ActiveStatusEnum {
+    OPENED("OPENED"),
+
+    CLOSED("CLOSED");
+
+    private String value;
+
+    ActiveStatusEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static ActiveStatusEnum fromValue(String text) {
+      for (ActiveStatusEnum b : ActiveStatusEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<ActiveStatusEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final ActiveStatusEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public ActiveStatusEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return ActiveStatusEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName("activeStatus")
+  private ActiveStatusEnum activeStatus = null;
+
 
   public AccountSearchModel accountCategory1(ReferenceModel accountCategory1) {
     this.accountCategory1 = accountCategory1;

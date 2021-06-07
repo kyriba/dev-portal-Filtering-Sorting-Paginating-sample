@@ -24,6 +24,7 @@ dependencies {
 	implementation("org.thymeleaf:thymeleaf:3.0.12.RELEASE")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.3.10.RELEASE")
 	implementation("io.swagger:swagger-annotations:1.5.24")
+	implementation("io.swagger:swagger-parser:2.0.0-rc1")
 	implementation("com.squareup.okhttp:okhttp:2.7.5")
 	implementation("com.squareup.okhttp:logging-interceptor:2.7.5")
 	implementation("com.google.code.gson:gson:2.8.1")

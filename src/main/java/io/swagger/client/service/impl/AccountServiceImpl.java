@@ -26,7 +26,7 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountsApi accountsApi;
-    @Value("${url.token}")
+    @Value("${access.token.url}")
     String tokenUrl;
     @Value("${client.id}")
     String clientId;
