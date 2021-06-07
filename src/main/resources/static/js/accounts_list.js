@@ -55,6 +55,12 @@ const createJsonElement = data => {
 }
 
 const createPagination = (url, pages, currentPage) => {
+
+    uri.searchParams.set('page.offset', currentPage - 1)
+    cURL.value = decodeURIComponent(uri)
+
+    document.querySelector('#pageOffset').value = currentPage - 1
+
     let pagination = document.querySelector('#paginationList')
     if (!pagination) {
         const main = document.querySelector('.container')
@@ -102,6 +108,7 @@ const createPagination = (url, pages, currentPage) => {
         currentUrl[i].searchParams.set('page.offset', (i - 1).toString())
 
         li.onclick = () => sendRequestToGetAccounts(currentUrl[i])
+
         a.innerText = i.toString()
         prev.after(li)
         if (currentPage === i) {

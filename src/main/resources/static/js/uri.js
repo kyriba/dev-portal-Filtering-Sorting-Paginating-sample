@@ -30,7 +30,7 @@ for (let i = 0; i < sort.length; i++) {
 pageLimit.addEventListener('input', event => {
     uri.searchParams.set('page.limit', event.target.value)
     if (event.target.value === '') {
-        uri.searchParams.delete('page.limit')
+        uri.searchParams.set('page.limit', 100)
     }
     cURL.value = decodeURIComponent(uri)
 })
@@ -38,7 +38,7 @@ pageLimit.addEventListener('input', event => {
 pageOffset.addEventListener('input', event => {
     uri.searchParams.set('page.offset', event.target.value)
     if (event.target.value === '') {
-        uri.searchParams.delete('page.offset')
+        uri.searchParams.set('page.offset', 0)
     }
     cURL.value = decodeURIComponent(uri)
 })
