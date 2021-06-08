@@ -24,7 +24,7 @@
     <div class="panel panel-info request">
         <div class="panel-body" style="background-color: #d9edf7; padding: 0; user-select: none">
             <span class="btn btn-info" style="background-color: #1e90ff; background-image: none">GET</span>
-            Get all accounts
+            <span th:text = "'Get all ' + ${requestMapping.replace('/v1/', ' ').replace('-', ' ')}"></span>
             <button onclick="sendFilters()" class="btn"
                     style=" background-color: #1e90ff; color: aliceblue; float: right">Send
             </button>
