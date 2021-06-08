@@ -70,7 +70,9 @@ java -jar "build/libs/filtering-sorting-pagination-1.0.0.jar"
 
 [comment]: <> (```)
 
-If everything has been made properly you can reach the page localhost:8080/list.
+If everything has been made properly you can reach the page [localhost:8080/list][1]
+
+[1]:http://localhost:8080/list "localhost:8080/list"
 
 By default, there is used port 8080, and it can be change in file ..\..\src\main\resources\application.yml
 
