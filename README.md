@@ -39,9 +39,9 @@ gradle build
 And execute jar file: 
 
 ```shell
-java -jar "build\libs\swagger-java-client-1.0.0.jar"
+java -jar "build/libs/filtering-sorting-pagination-1.0.0.jar"
 ```
-> ⚠️  _Please notice that the path to your local directory is provided in MacOS/ Unix format. Windows is slash-sensitive, so if you are using a Windows system, replace "/" with "\\".__
+> ⚠️  _Please notice that the path to your local directory is provided in MacOS/Unix format. Windows is slash-sensitive, so if you are using a Windows system, replace "/" with "\\"._
 
 [comment]: <> (###Another way)
 
@@ -69,7 +69,7 @@ java -jar "build\libs\swagger-java-client-1.0.0.jar"
 
 [comment]: <> (```)
 
-If everything has been made properly you can reach the page localhost:8080/accounts.
+If everything has been made properly you can reach the page localhost:8080/list.
 
 By default, there is used port 8080, and it can be change in file ..\..\src\main\resources\application.yml
 

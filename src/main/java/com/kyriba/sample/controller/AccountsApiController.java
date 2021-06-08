@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/accounts")
+@RequestMapping(value = "/list")
 public class AccountsApiController {
 
     private final AccountService accountService;
@@ -35,12 +35,13 @@ public class AccountsApiController {
         model.addAttribute("activeStatus", AccountSearchModel.ActiveStatusEnum.values());
         model.addAttribute("columns", ColumnsForSortingAndFiltering.values());
         model.addAttribute("baseUrl", accountService.getBaseUrl());
+        model.addAttribute("requestMapping", accountService.getRequestMapping());
         model.addAttribute("accountTypes", AccountSearchModel.AccountTypeEnum.values());
         model.addAttribute("port", port);
         return "accounts-list";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/get")
     @ResponseBody
     public ResponseEntity<PageOfAccountSearchModel> getAccountsJson(@RequestParam (value = "activeStatus", required = false) String activeStatus,
                                                                     @RequestParam (value = "filter", required = false) String filter,

@@ -8,4 +8,6 @@ public interface AccountService {
     PageOfAccountSearchModel getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort);
 
     String getBaseUrl();
+
+    String getRequestMapping();
 }

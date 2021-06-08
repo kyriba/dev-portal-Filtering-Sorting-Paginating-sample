@@ -31,7 +31,7 @@ public class ApiOperations {
     private ApiClient apiClient;
 
     @Value("${request.mapping}")
-    String localVarPath;
+    private String requestMapping;
 
 
     public ApiOperations(ApiClient apiClient) {
@@ -106,7 +106,7 @@ public class ApiOperations {
         }
 
         String[] localVarAuthNames = new String[]{"OAuth2ClientCredentials"};
-        return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
+        return apiClient.buildCall(requestMapping, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
     @SuppressWarnings("rawtypes")
@@ -193,5 +193,13 @@ public class ApiOperations {
         }.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
+    }
+
+    public String getRequestMapping() {
+        return requestMapping;
+    }
+
+    public void setRequestMapping(String requestMapping) {
+        this.requestMapping = requestMapping;
     }
 }

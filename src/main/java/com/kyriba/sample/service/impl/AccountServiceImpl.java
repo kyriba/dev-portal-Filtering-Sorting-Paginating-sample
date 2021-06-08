@@ -98,4 +98,9 @@ public class AccountServiceImpl implements AccountService {
     public String getBaseUrl() {
         return apiOperations.getApiClient().getBasePath();
     }
+
+    @Override
+    public String getRequestMapping() {
+        return apiOperations.getRequestMapping();
+    }
 }

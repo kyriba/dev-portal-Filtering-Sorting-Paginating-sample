@@ -4,7 +4,7 @@ const sendFilters = () => {
     let url = '/accounts/list?'
 
 
-    let curl = new URL('http://localhost:' + port + '/accounts/list')
+    let curl = new URL('http://localhost:' + port + '/list/get')
     curl.search = uri.search
     sendRequestToGetAccounts(curl)
     // sendRequestToGetAccounts(url)
