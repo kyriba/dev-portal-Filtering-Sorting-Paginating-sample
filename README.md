@@ -1,4 +1,4 @@
-# FilteringSortingPaginationAPI
+# dev-portal-Filtering-Sorting-Paginating-sample
 
 
 
@@ -22,12 +22,12 @@ Building the API client library requires:
 To copy the API client to your computer copy link of the repository, open Command Prompt, go to the location where project will be copied and execute git clone command:
 
 ```shell
-git clone https://github.com/OlhaLevko/FilteringSortingPaginationAPI.git
+git clone https://github.com/kyriba/dev-portal-Filtering-Sorting-Paginating-sample.git
 ```
 
 Open the project folder via command prompt, for example:
 ```shell
-cd FilteringSortingPaginationAPI
+cd dev-portal-Filtering-Sorting-Paginating-sample
 ```
 
 > ⚠️  _Before building project go to .../src/main/resources/application and update client_id and client_secret with your credentials._
