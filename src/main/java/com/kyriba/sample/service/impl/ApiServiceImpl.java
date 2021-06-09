@@ -6,7 +6,7 @@ import com.kyriba.sample.api.ApiOperations;
 import com.kyriba.sample.exception.InvalidTokenException;
 import com.kyriba.sample.exception.BadRequestException;
 import com.kyriba.sample.model.PageOfAccountSearchModel;
-import com.kyriba.sample.service.AccountService;
+import com.kyriba.sample.service.ApiService;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
@@ -14,7 +14,6 @@ import org.apache.oltu.oauth2.client.response.OAuthAccessTokenResponse;
 import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ import java.util.Base64;
 import java.util.List;
 
 @Service
-public class AccountServiceImpl implements AccountService {
+public class ApiServiceImpl implements ApiService {
 
     private final ApiOperations apiOperations;
     @Value("${access.token.url}")
@@ -34,7 +33,7 @@ public class AccountServiceImpl implements AccountService {
     String clientSecret;
 
 
-    public AccountServiceImpl(@Qualifier("apiOperations") ApiOperations apiOperations) {
+    public ApiServiceImpl(ApiOperations apiOperations) {
         this.apiOperations = apiOperations;
     }
 

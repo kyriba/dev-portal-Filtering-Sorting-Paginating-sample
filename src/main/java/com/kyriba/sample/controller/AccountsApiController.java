@@ -4,7 +4,7 @@ import com.kyriba.sample.enums.ColumnsForSortingAndFiltering;
 import com.kyriba.sample.exception.BadRequestException;
 import com.kyriba.sample.model.accounts.AccountSearchModel;
 import com.kyriba.sample.model.PageOfAccountSearchModel;
-import com.kyriba.sample.service.AccountService;
+import com.kyriba.sample.service.ApiService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +21,12 @@ import java.util.List;
 @RequestMapping(value = "/list")
 public class AccountsApiController {
 
-    private final AccountService accountService;
+    private final ApiService accountService;
     @Value("${server.port}")
     private String port;
 
 
-    public AccountsApiController( AccountService accountService) {
+    public AccountsApiController( ApiService accountService) {
         this.accountService = accountService;
     }
 

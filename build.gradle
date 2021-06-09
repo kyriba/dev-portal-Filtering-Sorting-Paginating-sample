@@ -6,7 +6,7 @@ plugins {
 
 apply plugin: 'application'
 
-mainClassName = 'io.swagger.client.AccountsApiApp'
+mainClassName = 'com.kyriba.sample.AccountsApiApp'
 
 jar { archiveBaseName="api-client"}
 
