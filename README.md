@@ -48,7 +48,7 @@ java -jar "build/libs/filtering-sorting-pagination-1.0.0.jar"
 If the application runs successfully, you can go to the link:
 
 ```shell
-http://localhost:5000/accounts
+http://localhost:5000/list
 ```
 
 > ⚠️  _To change the port, go to .../src/main/resources/application and replace the "port" value._
