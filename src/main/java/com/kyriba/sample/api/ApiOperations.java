@@ -15,7 +15,7 @@ package com.kyriba.sample.api;
 
 import com.google.gson.reflect.TypeToken;
 import com.kyriba.sample.*;
-import com.kyriba.sample.model.PageOfAccountSearchModel;
+import com.kyriba.sample.model.PageOfSearchModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -130,8 +130,8 @@ public class ApiOperations {
      * @return PageOfAccountSearchModel
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public PageOfAccountSearchModel readAccountsUsingGET1(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
-        ApiResponse<PageOfAccountSearchModel> resp = readAccountsUsingGET1WithHttpInfo(activeStatus, filter, pageLimit, pageOffset, sort);
+    public PageOfSearchModel readAccountsUsingGET1(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
+        ApiResponse<PageOfSearchModel> resp = readAccountsUsingGET1WithHttpInfo(activeStatus, filter, pageLimit, pageOffset, sort);
         return resp.getData();
     }
 
@@ -147,9 +147,9 @@ public class ApiOperations {
      * @return ApiResponse&lt;PageOfAccountSearchModel&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<PageOfAccountSearchModel> readAccountsUsingGET1WithHttpInfo(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
+    public ApiResponse<PageOfSearchModel> readAccountsUsingGET1WithHttpInfo(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
         com.squareup.okhttp.Call call = readAccountsUsingGET1ValidateBeforeCall(activeStatus, filter, pageLimit, pageOffset, sort, null, null);
-        Type localVarReturnType = new TypeToken<PageOfAccountSearchModel>() {
+        Type localVarReturnType = new TypeToken<PageOfSearchModel>() {
         }.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -167,7 +167,7 @@ public class ApiOperations {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call readAccountsUsingGET1Async(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort, final ApiCallback<PageOfAccountSearchModel> callback) throws ApiException {
+    public com.squareup.okhttp.Call readAccountsUsingGET1Async(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort, final ApiCallback<PageOfSearchModel> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -189,7 +189,7 @@ public class ApiOperations {
         }
 
         com.squareup.okhttp.Call call = readAccountsUsingGET1ValidateBeforeCall(activeStatus, filter, pageLimit, pageOffset, sort, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<PageOfAccountSearchModel>() {
+        Type localVarReturnType = new TypeToken<PageOfSearchModel>() {
         }.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;

@@ -14,12 +14,8 @@
 package com.kyriba.sample.api;
 
 import com.kyriba.sample.ApiException;
-import com.kyriba.sample.model.accounts.Account;
-import com.kyriba.sample.model.accounts.AccountDetailsDto;
-import com.kyriba.sample.model.PageOfAccountSearchModel;
-import com.kyriba.sample.model.ResponseIdModel;
+import com.kyriba.sample.model.PageOfSearchModel;
 
-import java.util.UUID;
 import org.junit.Test;
 import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +46,7 @@ public class ApiOperationsTest {
         Integer pageLimit = null;
         Integer pageOffset = null;
         List<String> sort = null;
-        PageOfAccountSearchModel response = api.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
+        PageOfSearchModel response = api.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
 
         // TODO: test validations
     }

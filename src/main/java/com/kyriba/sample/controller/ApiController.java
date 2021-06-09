@@ -3,7 +3,7 @@ package com.kyriba.sample.controller;
 import com.kyriba.sample.enums.ColumnsForSortingAndFiltering;
 import com.kyriba.sample.exception.BadRequestException;
 import com.kyriba.sample.model.accounts.AccountSearchModel;
-import com.kyriba.sample.model.PageOfAccountSearchModel;
+import com.kyriba.sample.model.PageOfSearchModel;
 import com.kyriba.sample.service.ApiService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -19,14 +19,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/list")
-public class AccountsApiController {
+public class ApiController {
 
     private final ApiService accountService;
     @Value("${server.port}")
     private String port;
 
 
-    public AccountsApiController( ApiService accountService) {
+    public ApiController(ApiService accountService) {
         this.accountService = accountService;
     }
 
@@ -43,13 +43,13 @@ public class AccountsApiController {
 
     @GetMapping("/get")
     @ResponseBody
-    public ResponseEntity<PageOfAccountSearchModel> getAccountsJson(@RequestParam (value = "activeStatus", required = false) String activeStatus,
-                                                                    @RequestParam (value = "filter", required = false) String filter,
-                                                                    @RequestParam (value = "page.limit", required = false) Integer pageLimit,
-                                                                    @RequestParam (value = "page.offset", required = false) Integer pageOffset,
-                                                                    @RequestParam(value = "sort", required = false) List<String> sort)
+    public ResponseEntity<PageOfSearchModel> getAccountsJson(@RequestParam (value = "activeStatus", required = false) String activeStatus,
+                                                             @RequestParam (value = "filter", required = false) String filter,
+                                                             @RequestParam (value = "page.limit", required = false) Integer pageLimit,
+                                                             @RequestParam (value = "page.offset", required = false) Integer pageOffset,
+                                                             @RequestParam(value = "sort", required = false) List<String> sort)
     throws BadRequestException {
-        PageOfAccountSearchModel result = accountService.getAllAccounts(activeStatus, filter, pageLimit, pageOffset, sort);
+        PageOfSearchModel result = accountService.getAllAccounts(activeStatus, filter, pageLimit, pageOffset, sort);
         System.out.println(result);
         return new ResponseEntity<>(result,
                 HttpStatus.OK);

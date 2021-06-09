@@ -1,11 +1,11 @@
 package com.kyriba.sample.service;
 
 
-import com.kyriba.sample.model.PageOfAccountSearchModel;
+import com.kyriba.sample.model.PageOfSearchModel;
 import java.util.List;
 
 public interface ApiService {
-    PageOfAccountSearchModel getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort);
+    PageOfSearchModel getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort);
 
     String getBaseUrl();
 

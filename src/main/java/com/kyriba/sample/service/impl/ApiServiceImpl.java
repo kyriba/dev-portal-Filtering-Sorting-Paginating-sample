@@ -5,7 +5,7 @@ import com.kyriba.sample.ApiException;
 import com.kyriba.sample.api.ApiOperations;
 import com.kyriba.sample.exception.InvalidTokenException;
 import com.kyriba.sample.exception.BadRequestException;
-import com.kyriba.sample.model.PageOfAccountSearchModel;
+import com.kyriba.sample.model.PageOfSearchModel;
 import com.kyriba.sample.service.ApiService;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
@@ -44,8 +44,8 @@ public class ApiServiceImpl implements ApiService {
 
 
     @Override
-    public PageOfAccountSearchModel getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) {
-        PageOfAccountSearchModel result;
+    public PageOfSearchModel getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) {
+        PageOfSearchModel result;
         try {
             result = apiOperations.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
         } catch (InvalidTokenException e) {

@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class AccountsApiApp {
+public class ApiAppMainClass {
 
     public static void main(String[] args) {
-        SpringApplication.run(AccountsApiApp.class, args);
+        SpringApplication.run(ApiAppMainClass.class, args);
     }
 }

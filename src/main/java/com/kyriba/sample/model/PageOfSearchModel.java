@@ -25,14 +25,14 @@ import java.util.Objects;
  * PageOfSearchModels
  */
 
-public class PageOfAccountSearchModel {
+public class PageOfSearchModel {
     @SerializedName("metadata")
     private Metadata metadata = null;
 
     @SerializedName("results")
     private List<AccountSearchModel> results = null;
 
-    public PageOfAccountSearchModel metadata(Metadata metadata) {
+    public PageOfSearchModel metadata(Metadata metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -50,12 +50,12 @@ public class PageOfAccountSearchModel {
         this.metadata = metadata;
     }
 
-    public PageOfAccountSearchModel results(List<AccountSearchModel> results) {
+    public PageOfSearchModel results(List<AccountSearchModel> results) {
         this.results = results;
         return this;
     }
 
-    public PageOfAccountSearchModel addResultsItem(AccountSearchModel resultsItem) {
+    public PageOfSearchModel addResultsItem(AccountSearchModel resultsItem) {
         if (this.results == null) {
             this.results = new ArrayList<AccountSearchModel>();
         }
@@ -85,9 +85,9 @@ public class PageOfAccountSearchModel {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PageOfAccountSearchModel pageOfAccountSearchModel = (PageOfAccountSearchModel) o;
-        return Objects.equals(this.metadata, pageOfAccountSearchModel.metadata) &&
-                Objects.equals(this.results, pageOfAccountSearchModel.results);
+        PageOfSearchModel pageOfSearchModel = (PageOfSearchModel) o;
+        return Objects.equals(this.metadata, pageOfSearchModel.metadata) &&
+                Objects.equals(this.results, pageOfSearchModel.results);
     }
 
     @Override

@@ -6,7 +6,7 @@ plugins {
 
 apply plugin: 'application'
 
-mainClassName = 'com.kyriba.sample.AccountsApiApp'
+mainClassName = 'com.kyriba.sample.ApiAppMainClass'
 
 jar { archiveBaseName="api-client"}
 
@@ -39,6 +39,6 @@ dependencies {
 	testImplementation("junit:junit:4.13.1")
 }
 
-group = "io.swagger"
+group = "com.kyriba"
 version = "1.0.0"
-description = "swagger-java-client"
+description = "filtering-sorting-pagination"
