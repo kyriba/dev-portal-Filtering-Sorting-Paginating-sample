@@ -1,0 +1,10 @@
+api:
+  filters:
+    - code
+    - uuid
+    - description
+    - bank.code
+    - bank.uuid
+    - address.country.code
+    - address.country.uuid
+    - bic

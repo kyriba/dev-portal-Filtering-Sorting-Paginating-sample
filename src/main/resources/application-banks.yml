@@ -1,0 +1,9 @@
+api:
+  filters:
+    - code
+    - uuid
+    - description
+    - defaultGroup.uuid
+    - defaultGroup.code
+    - countryCode
+    - intercompany

@@ -1,0 +1,9 @@
+api:
+  filters:
+    - code
+    - uuid
+    - description
+    - leader.uuid
+    - leader.code
+    - intermediary
+    - counterparty
