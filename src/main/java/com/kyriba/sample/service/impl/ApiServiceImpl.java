@@ -14,6 +14,7 @@ import org.apache.oltu.oauth2.client.response.OAuthAccessTokenResponse;
 import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +23,9 @@ import java.util.Base64;
 import java.util.List;
 
 @Service
-public class ApiServiceImpl implements ApiService {
+public class ApiServiceImpl<T> implements ApiService<T> {
 
-    private final ApiOperations apiOperations;
+    private final ApiOperations<T> apiOperations;
     @Value("${access.token.url}")
     String tokenUrl;
     @Value("${client.id}")
@@ -33,7 +34,7 @@ public class ApiServiceImpl implements ApiService {
     String clientSecret;
 
 
-    public ApiServiceImpl(ApiOperations apiOperations) {
+    public ApiServiceImpl(@Qualifier("apiOperations") ApiOperations<T> apiOperations) {
         this.apiOperations = apiOperations;
     }
 
@@ -44,8 +45,8 @@ public class ApiServiceImpl implements ApiService {
 
 
     @Override
-    public PageOfSearchModel getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) {
-        PageOfSearchModel result;
+    public PageOfSearchModel<T> getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) {
+        PageOfSearchModel<T> result;
         try {
             result = apiOperations.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
         } catch (InvalidTokenException e) {

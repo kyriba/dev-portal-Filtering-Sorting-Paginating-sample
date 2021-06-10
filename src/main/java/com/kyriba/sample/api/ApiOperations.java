@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ApiOperations {
+public class ApiOperations<T> {
     private ApiClient apiClient;
 
     @Value("${request.mapping}")
@@ -113,14 +113,13 @@ public class ApiOperations {
     private com.squareup.okhttp.Call readAccountsUsingGET1ValidateBeforeCall(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 
 
-        com.squareup.okhttp.Call call = readAccountsUsingGET1Call(activeStatus, filter, pageLimit, pageOffset, sort, progressListener, progressRequestListener);
-        return call;
+        return readAccountsUsingGET1Call(activeStatus, filter, pageLimit, pageOffset, sort, progressListener, progressRequestListener);
 
     }
 
     /**
-     * List accounts (all accounts or a selection of accounts).
-     * An empty list is returned if no accounts are available. The following fields can be used for filter and sort: - **code** - **uuid** - **description** - **company.uuid** - **company.code** - **branch.uuid** - **branch.code** - **bank.uuid** - **bank.code** - **currency.uuid** - **currency.code** - **country.code** - **accountType** available values &#x3D; {BANK_ACCOUNT,INTERCOMPANY_ACCOUNT,OTHER_ACCOUNT,SHARED_ACCOUNT} - **banCode** - **creationDate** - **updateDate** - **closingDate** - **activeStatus** available values &#x3D; {OPENED,CLOSED} - **statementIdentifier**
+     * List accounts.yaml (all accounts.yaml or a selection of accounts.yaml).
+     * An empty list is returned if no accounts.yaml are available. The following fields can be used for filter and sort: - **code** - **uuid** - **description** - **company.uuid** - **company.code** - **branch.uuid** - **branch.code** - **bank.uuid** - **bank.code** - **currency.uuid** - **currency.code** - **country.code** - **accountType** available values &#x3D; {BANK_ACCOUNT,INTERCOMPANY_ACCOUNT,OTHER_ACCOUNT,SHARED_ACCOUNT} - **banCode** - **creationDate** - **updateDate** - **closingDate** - **activeStatus** available values &#x3D; {OPENED,CLOSED} - **statementIdentifier**
      *
      * @param activeStatus activeStatus (optional)
      * @param filter       Filter represents search query on RSQL language. The fields which can be used in filter query are defined in description for endpoint.  The following RSQL comparing operators are supported: &#x3D;&#x3D; : Evaluates to true if the attribute is equal to the value. !&#x3D; : Evaluates to true if the attribute is not equal to the value. &#x3D;in&#x3D; : Evaluates to true if the attribute exactly matches any of the values in the list. &#x3D;out&#x3D; : Evaluates to true if the attribute does not match any of the values in the list. &#x3D;&#x3D;ABC* : Similar to SQL like &#39;ABC%. &#x3D;&#x3D;*ABC : Similar to SQL like &#39;%ABC. &#x3D;&#x3D;*ABC* : Similar to SQL like &#39;%ABC%. &#x3D;lt&#x3D; : Evaluates to true if the attribute is less than the value. &#x3D;gt&#x3D; : Evaluates to true if the attribute is greater than the value. &#x3D;le&#x3D; : Evaluates to true if the attribute is less than or equal to the value. &#x3D;ge&#x3D; : Evaluates to true if the attribute is greater than or equal to the value.  Logical Operators: RSQL expression is composed of one or more comparisons, related to each other with logical operators: Logical AND &#39;**;**&#39; or &#39;**and**&#39; Logical OR &#39;**,**&#39; or &#39;**or**&#39;.  Argument can be a single value, or multiple values in parenthesis separated by comma. Value that doesn’t contain any reserved character or a white space can be unquoted, other arguments must be enclosed in single or double quotes. (optional)
@@ -130,14 +129,14 @@ public class ApiOperations {
      * @return PageOfAccountSearchModel
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public PageOfSearchModel readAccountsUsingGET1(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
-        ApiResponse<PageOfSearchModel> resp = readAccountsUsingGET1WithHttpInfo(activeStatus, filter, pageLimit, pageOffset, sort);
+    public PageOfSearchModel<T> readAccountsUsingGET1(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
+        ApiResponse<PageOfSearchModel<T>> resp = readAccountsUsingGET1WithHttpInfo(activeStatus, filter, pageLimit, pageOffset, sort);
         return resp.getData();
     }
 
     /**
-     * List accounts (all accounts or a selection of accounts).
-     * An empty list is returned if no accounts are available. The following fields can be used for filter and sort: - **code** - **uuid** - **description** - **company.uuid** - **company.code** - **branch.uuid** - **branch.code** - **bank.uuid** - **bank.code** - **currency.uuid** - **currency.code** - **country.code** - **accountType** available values &#x3D; {BANK_ACCOUNT,INTERCOMPANY_ACCOUNT,OTHER_ACCOUNT,SHARED_ACCOUNT} - **banCode** - **creationDate** - **updateDate** - **closingDate** - **activeStatus** available values &#x3D; {OPENED,CLOSED} - **statementIdentifier**
+     * List accounts.yaml (all accounts.yaml or a selection of accounts.yaml).
+     * An empty list is returned if no accounts.yaml are available. The following fields can be used for filter and sort: - **code** - **uuid** - **description** - **company.uuid** - **company.code** - **branch.uuid** - **branch.code** - **bank.uuid** - **bank.code** - **currency.uuid** - **currency.code** - **country.code** - **accountType** available values &#x3D; {BANK_ACCOUNT,INTERCOMPANY_ACCOUNT,OTHER_ACCOUNT,SHARED_ACCOUNT} - **banCode** - **creationDate** - **updateDate** - **closingDate** - **activeStatus** available values &#x3D; {OPENED,CLOSED} - **statementIdentifier**
      *
      * @param activeStatus activeStatus (optional)
      * @param filter       Filter represents search query on RSQL language. The fields which can be used in filter query are defined in description for endpoint.  The following RSQL comparing operators are supported: &#x3D;&#x3D; : Evaluates to true if the attribute is equal to the value. !&#x3D; : Evaluates to true if the attribute is not equal to the value. &#x3D;in&#x3D; : Evaluates to true if the attribute exactly matches any of the values in the list. &#x3D;out&#x3D; : Evaluates to true if the attribute does not match any of the values in the list. &#x3D;&#x3D;ABC* : Similar to SQL like &#39;ABC%. &#x3D;&#x3D;*ABC : Similar to SQL like &#39;%ABC. &#x3D;&#x3D;*ABC* : Similar to SQL like &#39;%ABC%. &#x3D;lt&#x3D; : Evaluates to true if the attribute is less than the value. &#x3D;gt&#x3D; : Evaluates to true if the attribute is greater than the value. &#x3D;le&#x3D; : Evaluates to true if the attribute is less than or equal to the value. &#x3D;ge&#x3D; : Evaluates to true if the attribute is greater than or equal to the value.  Logical Operators: RSQL expression is composed of one or more comparisons, related to each other with logical operators: Logical AND &#39;**;**&#39; or &#39;**and**&#39; Logical OR &#39;**,**&#39; or &#39;**or**&#39;.  Argument can be a single value, or multiple values in parenthesis separated by comma. Value that doesn’t contain any reserved character or a white space can be unquoted, other arguments must be enclosed in single or double quotes. (optional)
@@ -147,16 +146,16 @@ public class ApiOperations {
      * @return ApiResponse&lt;PageOfAccountSearchModel&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<PageOfSearchModel> readAccountsUsingGET1WithHttpInfo(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
+    public ApiResponse<PageOfSearchModel<T>> readAccountsUsingGET1WithHttpInfo(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
         com.squareup.okhttp.Call call = readAccountsUsingGET1ValidateBeforeCall(activeStatus, filter, pageLimit, pageOffset, sort, null, null);
-        Type localVarReturnType = new TypeToken<PageOfSearchModel>() {
+        Type localVarReturnType = new TypeToken<PageOfSearchModel<T>>() {
         }.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
-     * List accounts (all accounts or a selection of accounts). (asynchronously)
-     * An empty list is returned if no accounts are available. The following fields can be used for filter and sort: - **code** - **uuid** - **description** - **company.uuid** - **company.code** - **branch.uuid** - **branch.code** - **bank.uuid** - **bank.code** - **currency.uuid** - **currency.code** - **country.code** - **accountType** available values &#x3D; {BANK_ACCOUNT,INTERCOMPANY_ACCOUNT,OTHER_ACCOUNT,SHARED_ACCOUNT} - **banCode** - **creationDate** - **updateDate** - **closingDate** - **activeStatus** available values &#x3D; {OPENED,CLOSED} - **statementIdentifier**
+     * List accounts.yaml (all accounts.yaml or a selection of accounts.yaml). (asynchronously)
+     * An empty list is returned if no accounts.yaml are available. The following fields can be used for filter and sort: - **code** - **uuid** - **description** - **company.uuid** - **company.code** - **branch.uuid** - **branch.code** - **bank.uuid** - **bank.code** - **currency.uuid** - **currency.code** - **country.code** - **accountType** available values &#x3D; {BANK_ACCOUNT,INTERCOMPANY_ACCOUNT,OTHER_ACCOUNT,SHARED_ACCOUNT} - **banCode** - **creationDate** - **updateDate** - **closingDate** - **activeStatus** available values &#x3D; {OPENED,CLOSED} - **statementIdentifier**
      *
      * @param activeStatus activeStatus (optional)
      * @param filter       Filter represents search query on RSQL language. The fields which can be used in filter query are defined in description for endpoint.  The following RSQL comparing operators are supported: &#x3D;&#x3D; : Evaluates to true if the attribute is equal to the value. !&#x3D; : Evaluates to true if the attribute is not equal to the value. &#x3D;in&#x3D; : Evaluates to true if the attribute exactly matches any of the values in the list. &#x3D;out&#x3D; : Evaluates to true if the attribute does not match any of the values in the list. &#x3D;&#x3D;ABC* : Similar to SQL like &#39;ABC%. &#x3D;&#x3D;*ABC : Similar to SQL like &#39;%ABC. &#x3D;&#x3D;*ABC* : Similar to SQL like &#39;%ABC%. &#x3D;lt&#x3D; : Evaluates to true if the attribute is less than the value. &#x3D;gt&#x3D; : Evaluates to true if the attribute is greater than the value. &#x3D;le&#x3D; : Evaluates to true if the attribute is less than or equal to the value. &#x3D;ge&#x3D; : Evaluates to true if the attribute is greater than or equal to the value.  Logical Operators: RSQL expression is composed of one or more comparisons, related to each other with logical operators: Logical AND &#39;**;**&#39; or &#39;**and**&#39; Logical OR &#39;**,**&#39; or &#39;**or**&#39;.  Argument can be a single value, or multiple values in parenthesis separated by comma. Value that doesn’t contain any reserved character or a white space can be unquoted, other arguments must be enclosed in single or double quotes. (optional)

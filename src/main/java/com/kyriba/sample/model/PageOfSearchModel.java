@@ -25,14 +25,14 @@ import java.util.Objects;
  * PageOfSearchModels
  */
 
-public class PageOfSearchModel {
+public class PageOfSearchModel<T>{
     @SerializedName("metadata")
     private Metadata metadata = null;
 
     @SerializedName("results")
-    private List<AccountSearchModel> results = null;
+    private List<T> results = null;
 
-    public PageOfSearchModel metadata(Metadata metadata) {
+    public PageOfSearchModel<T> metadata(Metadata metadata) {
         this.metadata = metadata;
         return this;
     }
@@ -50,14 +50,14 @@ public class PageOfSearchModel {
         this.metadata = metadata;
     }
 
-    public PageOfSearchModel results(List<AccountSearchModel> results) {
+    public PageOfSearchModel<T> results(List<T> results) {
         this.results = results;
         return this;
     }
 
-    public PageOfSearchModel addResultsItem(AccountSearchModel resultsItem) {
+    public PageOfSearchModel<T> addResultsItem(T resultsItem) {
         if (this.results == null) {
-            this.results = new ArrayList<AccountSearchModel>();
+            this.results = new ArrayList<T>();
         }
         this.results.add(resultsItem);
         return this;
@@ -68,11 +68,11 @@ public class PageOfSearchModel {
      * @return results
      **/
     @ApiModelProperty(value = "")
-    public List<AccountSearchModel> getResults() {
+    public List<T> getResults() {
         return results;
     }
 
-    public void setResults(List<AccountSearchModel> results) {
+    public void setResults(List<T> results) {
         this.results = results;
     }
 
@@ -85,7 +85,7 @@ public class PageOfSearchModel {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PageOfSearchModel pageOfSearchModel = (PageOfSearchModel) o;
+        PageOfSearchModel<T> pageOfSearchModel = (PageOfSearchModel<T>) o;
         return Objects.equals(this.metadata, pageOfSearchModel.metadata) &&
                 Objects.equals(this.results, pageOfSearchModel.results);
     }

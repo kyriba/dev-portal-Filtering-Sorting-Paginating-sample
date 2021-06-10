@@ -1003,10 +1003,10 @@ public class AccountDetailsDto {
   }
 
    /**
-   * Chart of accounts.
+   * Chart of accounts.yaml.
    * @return chartOfAccounts
   **/
-  @ApiModelProperty(value = "Chart of accounts.")
+  @ApiModelProperty(value = "Chart of accounts.yaml.")
   public ReferenceModel getChartOfAccounts() {
     return chartOfAccounts;
   }
@@ -1039,10 +1039,10 @@ public class AccountDetailsDto {
   }
 
    /**
-   * Code that represents the current account in the internal chart of GL accounts.
+   * Code that represents the current account in the internal chart of GL accounts.yaml.
    * @return internalAccountCode
   **/
-  @ApiModelProperty(example = "GLACCOUNT", value = "Code that represents the current account in the internal chart of GL accounts.")
+  @ApiModelProperty(example = "GLACCOUNT", value = "Code that represents the current account in the internal chart of GL accounts.yaml.")
   public String getInternalAccountCode() {
     return internalAccountCode;
   }

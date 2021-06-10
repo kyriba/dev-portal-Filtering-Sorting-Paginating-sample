@@ -1,13 +1,8 @@
 const sendFilters = () => {
-    const fields = ['sort', 'activeStatus', 'filter', 'page.limit', 'page.offset']
-    const form = document.querySelector('#select_filters_form')
-    let url = '/accounts/list?'
-
 
     let curl = new URL('http://localhost:' + port + '/list/get')
     curl.search = uri.search
     sendRequestToGetAccounts(curl)
-    // sendRequestToGetAccounts(url)
 }
 const sendRequestToGetAccounts = (url) => {
     const request = new Request(url, {
@@ -82,7 +77,6 @@ const createPagination = (url, pages, currentPage) => {
     const prev = pagination.querySelector('#previousPage')
     const next = pagination.querySelector('#nextPage')
 
-    // const urlPrev = updateQueryStringParameter(url, 'page.offset', currentPage - 2)
     let urlPrev = new URL(url)
     urlPrev.searchParams.set('page.offset', currentPage - 2)
     prev.onclick = () => {
@@ -176,7 +170,6 @@ function removeField(elem) {
 
 
 const addInputField = (el) => {
-    const numberFields = ['creationDate', 'updateDate', 'closingDate']
     const type = el.value
     const operator = el.nextElementSibling
     const input = el.nextElementSibling.nextElementSibling
@@ -188,7 +181,7 @@ const addInputField = (el) => {
     input.setAttribute('type', 'text')
     Array.from(operator.children)
         .map(op => op.hidden = false)
-    if (numberFields.includes(type)) {
+    if (type.toLowerCase().includes('date')) {
         input.setAttribute('type', 'date')
         let oper = ['Equals', '<', '>', '≤', '≥']
         Array.from(operator.children).filter(op => !oper.includes(op.textContent))

@@ -30,7 +30,7 @@ Open the project folder via command prompt, for example:
 cd dev-portal-Filtering-Sorting-Paginating-sample
 ```
 
-> ⚠️  _Before building project go to .../src/main/resources/application and update client_id and client_secret with your credentials._
+> ⚠️  _Before building project go to .../src/main/resources/application.yml and update client_id and client_secret with your credentials._
 
 Build project:
 ```shell
@@ -51,7 +51,7 @@ If the application runs successfully, you can go to the link:
 http://localhost:5000/list
 ```
 
-> ⚠️  _To change the port, go to .../src/main/resources/application and replace the "port" value._
+> ⚠️  _To change the port, go to .../src/main/resources/application.yml and replace the "port" value._
 
 To terminate application press Ctrl + C and execute Y if this appeared:
 
