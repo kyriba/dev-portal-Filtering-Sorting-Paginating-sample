@@ -11,7 +11,7 @@ access:
 
 base:
   api:
-    name: banks
+    name: accounts
   url: https://demo.kyriba.com/gateway/api
 
 request:
@@ -20,6 +20,10 @@ request:
 spring:
   profiles:
     active: ${base.api.name}
+  banner:
+    location: banner
+    image:
+      width: 1300
 
 
 

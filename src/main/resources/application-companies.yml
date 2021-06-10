@@ -1,0 +1,14 @@
+api:
+  filters:
+    - code
+    - uuid
+    - description1
+    - description2
+    - shortCode
+    - interfaceCode
+    - defaultGroup.uuid
+    - defaultGroup.code
+    - businessIdentifiers.otherIdentifierType
+    - businessIdentifiers.otherIdentifierValue
+    - address.country.code
+    - address.country.uuid

@@ -906,9 +906,6 @@ public class ApiClient {
      */
     public <T> T handleResponse(Response response, Type returnType) throws ApiException {
         if (response.isSuccessful()) {
-
-                System.out.println(response.body());
-
             if (returnType == null || response.code() == 204) {
                 // returning null if the returnType is not defined,
                 // or the status code is 204 (No Content)

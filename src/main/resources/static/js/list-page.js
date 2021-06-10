@@ -26,6 +26,9 @@ const sendRequestToGetAccounts = (url) => {
         .then(data => {
             const pages = Math.ceil(data.metadata.numberOfTotalResults / data.metadata.pageResults)
             const currentPage = data.metadata.pageOffset + 1
+            if(pages === currentPage) {
+                data.metadata.links.next = null
+            }
             createPagination(url, pages, currentPage)
             createJsonElement(data)
         })
