@@ -5,8 +5,8 @@
 ## Requirements
 
 Building the API client library requires:
-1. Java 1.8 or higher [Java SE Installation][1]
-2. Gradle [Gradle Installation][2]
+1. Java 1.8 or higher [Installation][1]
+2. Gradle [Installation][2]
 
 [1]: https://www.oracle.com/java/technologies/javase-downloads.html 
 [2]: https://gradle.org/install/
@@ -53,8 +53,4 @@ http://localhost:5000/list
 
 > ⚠️  _To change the port, go to .../src/main/resources/application.yml and replace the "port" value._
 
-To terminate application press Ctrl + C and execute Y if this appeared:
-
-```shell
-Terminate batch job (Y/N)?
-```
+To terminate application press Ctrl + C and execute Y.
