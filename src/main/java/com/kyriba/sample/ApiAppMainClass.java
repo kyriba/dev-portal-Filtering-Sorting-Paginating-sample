@@ -16,10 +16,7 @@ public class ApiAppMainClass {
         Properties properties = new Properties();
         String name = getName();
         properties.put("base.api.name", name);
-//        properties.computeIfPresent("ex.filters", (k, v) -> v = "*" + name);
-//        properties.forEach((k,v) -> System.out.println(k + ": " + v));
         application.setDefaultProperties(properties);
-
         application.run(args);
     }
 

@@ -45,11 +45,14 @@ java -jar "build/libs/filtering-sorting-pagination-1.0.0.jar"
 > ⚠️  _Please notice that the path to your local directory is provided in MacOS/Unix format. Windows is slash-sensitive, so if you are using a Windows system, replace "/" with "\\"._
 
 
-If the application runs successfully, you can go to the link:
+Go to the link:
 
 ```shell
 http://localhost:5000/list
 ```
+
+If everything was done accordingly with provided steps, the result should look as presented in the image below:
+![img.png](img.png)
 
 > ⚠️  _To change the port, go to .../src/main/resources/application.yml and replace the "port" value._
 

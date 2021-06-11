@@ -13,6 +13,7 @@
 
 package com.kyriba.sample.model;
 
+import com.fasterxml.jackson.databind.JavaType;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModelProperty;
