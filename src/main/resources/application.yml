@@ -10,17 +10,98 @@ access:
     url: https://demo.kyriba.com/gateway/oauth/token
 
 base:
-#  api:
-#    name: accounts
   url: https://demo.kyriba.com/gateway/api
 
 request:
   mapping: /v1/${base.api.name}
 
 
+api:
+  filters:
+    accounts:
+      - code
+      - uuid
+      - description
+      - company.uuid
+      - company.code
+      - branch.uuid
+      - branch.code
+      - bank.uuid
+      - bank.code
+      - currency.uuid
+      - currency.code
+      - country.code
+      - accountType
+      - banCode
+      - creationDate
+      - updateDate
+      - closingDate
+      - activeStatus
+      - statementIdentifier
+
+    bank-branches:
+      - code
+      - uuid
+      - description
+      - bank.code
+      - bank.uuid
+      - address.country.code
+      - address.country.uuid
+      - bic
+
+    bank-groups:
+      - code
+      - uuid
+      - description
+      - leader.uuid
+      - leader.code
+      - intermediary
+      - counterparty
+
+    banks:
+      - code
+      - uuid
+      - description
+      - defaultGroup.uuid
+      - defaultGroup.code
+      - countryCode
+      - intercompany
+
+    companies:
+      - code
+      - uuid
+      - description1
+      - description2
+      - shortCode
+      - interfaceCode
+      - defaultGroup.uuid
+      - defaultGroup.code
+      - businessIdentifiers.otherIdentifierType
+      - businessIdentifiers.otherIdentifierValue
+      - address.country.code
+      - address.country.uuid
+
+    users:
+      - code
+      - uuid
+      - interfaceCode
+      - description
+      - firstName
+      - lastName
+      - email
+      - ssoIdentity
+      - accessProfile.uuid
+      - accessProfile.code
+      - dataPermissionProfile.uuid
+      - dataPermissionProfile.code
+      - companyOwnership.uuid
+      - companyOwnership.code
+      - paymentAdministrator
+      - systemAdministrator
+      - emailRecipient
+
+
 spring:
-  profiles:
-    active: ${base.api.name}
   banner:
     location: banner
     image:

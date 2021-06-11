@@ -13,10 +13,12 @@
 
 package com.kyriba.sample.model;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModelProperty;
 import com.kyriba.sample.model.accounts.AccountSearchModel;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,6 +33,8 @@ public class PageOfSearchModel<T>{
 
     @SerializedName("results")
     private List<T> results = null;
+
+    private T type;
 
     public PageOfSearchModel<T> metadata(Metadata metadata) {
         this.metadata = metadata;

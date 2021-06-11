@@ -14,7 +14,10 @@ public class ApiAppMainClass {
         SpringApplication application = new SpringApplication(ApiAppMainClass.class);
 
         Properties properties = new Properties();
-        properties.put("base.api.name", getName());
+        String name = getName();
+        properties.put("base.api.name", name);
+//        properties.computeIfPresent("ex.filters", (k, v) -> v = "*" + name);
+//        properties.forEach((k,v) -> System.out.println(k + ": " + v));
         application.setDefaultProperties(properties);
 
         application.run(args);
