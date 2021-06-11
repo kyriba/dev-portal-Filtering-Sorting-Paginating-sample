@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
-@ConfigurationProperties(prefix = "api")
+@ConfigurationProperties("api")
 public class FiltersConfig {
 
     private List<String> filters;
