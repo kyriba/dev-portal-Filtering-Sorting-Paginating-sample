@@ -24,12 +24,7 @@ const sendRequestToGetAccounts = (url) => {
                 })
         })
         .then(data => {
-            const pages = Math.ceil(data.metadata.numberOfTotalResults / data.metadata.pageResults)
-            const currentPage = data.metadata.pageOffset + 1
-            if(pages === currentPage) {
-                data.metadata.links.next = null
-            }
-            createPagination(url, pages, currentPage)
+            createPagination(url, data)
             createJsonElement(data)
         })
         .catch(err => {
@@ -52,12 +47,16 @@ const createJsonElement = data => {
     }
 }
 
-const createPagination = (url, pages, currentPage) => {
+const createPagination = (url, data) => {
 
-    uri.searchParams.set('page.offset', currentPage - 1)
+    const pages = Math.ceil(data.metadata.numberOfTotalResults / data.metadata.pageLimit)
+    const pageLimit = data.metadata.pageLimit
+    const pageOffset = data.metadata.pageOffset
+
+    uri.searchParams.set('page.offset', pageOffset)
     cURL.value = decodeURIComponent(uri)
 
-    document.querySelector('#pageOffset').value = currentPage - 1
+    document.querySelector('#pageOffset').value = pageOffset
 
     let pagination = document.querySelector('#paginationList')
     if (!pagination) {
@@ -81,14 +80,14 @@ const createPagination = (url, pages, currentPage) => {
     const next = pagination.querySelector('#nextPage')
 
     let urlPrev = new URL(url)
-    urlPrev.searchParams.set('page.offset', currentPage - 2)
+    urlPrev.searchParams.set('page.offset', pageOffset - pageLimit)
     prev.onclick = () => {
         if (!prev.classList.contains('disable'))
             sendRequestToGetAccounts(urlPrev)
     }
 
     let urlNext = new URL(url)
-    urlNext.searchParams.set('page.offset', currentPage)
+    urlNext.searchParams.set('page.offset', pageOffset + pageLimit)
     next.onclick = () => {
         if (!next.classList.contains('disable'))
             sendRequestToGetAccounts(urlNext)
@@ -96,28 +95,33 @@ const createPagination = (url, pages, currentPage) => {
 
     let currentUrl = []
 
-    for (let i = pages; i > 0; i--) {
+    for (let i = pages - 1; i >= 0; i--) {
 
         let li = document.createElement('li')
         let a = document.createElement('a')
         li.appendChild(a)
         currentUrl[i] = new URL(url)
-        currentUrl[i].searchParams.set('page.offset', (i - 1).toString())
+        currentUrl[i].searchParams.set('page.offset', pageLimit*i)
 
         li.onclick = () => sendRequestToGetAccounts(currentUrl[i])
 
-        a.innerText = i.toString()
+        a.innerText = (i + 1).toString()
         prev.after(li)
-        if (currentPage === i) {
+        console.log(pageOffset)
+        console.log(currentUrl[i].searchParams.get('page.offset'))
+        console.log(currentUrl[i])
+
+        if (pageOffset == currentUrl[i].searchParams.get('page.offset')) {
+
             li.classList.add('active')
         }
     }
 
-    if (currentPage === 1) {
+    if (!data.metadata.links.prev) {
         prev.classList.add('disable')
     }
 
-    if (currentPage === pages) {
+    if (!data.metadata.links.next) {
         next.classList.add('disable')
     }
 
