@@ -101,12 +101,5 @@ api:
       - emailRecipient
 
 
-spring:
-  banner:
-    location: banner
-    image:
-      width: 1300
-
-
 
 
