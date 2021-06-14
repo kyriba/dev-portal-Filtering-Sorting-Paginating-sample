@@ -24,7 +24,6 @@ import java.util.Objects;
  * Full address.
  */
 @ApiModel(description = "Full address.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-28T20:08:11.883Z")
 public class AddressModel {
   @SerializedName("city")
   private String city = null;

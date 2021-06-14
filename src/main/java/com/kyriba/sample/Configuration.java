@@ -13,7 +13,6 @@
 
 package com.kyriba.sample;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class Configuration {
     private static ApiClient defaultApiClient = new ApiClient();
 

@@ -25,7 +25,6 @@ import com.kyriba.sample.model.ReferenceModel;
  * Account correspondent.
  */
 @ApiModel(description = "Account correspondent.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class AccountCorrespondent {
   @SerializedName("oneTime")
   private Boolean oneTime = null;

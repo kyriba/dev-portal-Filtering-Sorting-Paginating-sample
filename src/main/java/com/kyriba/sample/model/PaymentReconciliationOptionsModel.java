@@ -29,7 +29,6 @@ import java.io.IOException;
  * Payment Reconciliation Options.
  */
 @ApiModel(description = "Payment Reconciliation Options.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class PaymentReconciliationOptionsModel {
   /**
    * Real Bank account used for Checks. Default &#x3D; CURRENT_ACCOUNT

@@ -29,7 +29,6 @@ import java.io.IOException;
  * Account Id.
  */
 @ApiModel(description = "Account Id.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class AccountIdModel {
   /**
    * Type of the BAN. Default &#x3D; LBAN_1_STRUCTURE

@@ -40,7 +40,6 @@ import org.threeten.bp.LocalDate;
  * Account.
  */
 @ApiModel(description = "Account.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class Account {
   @SerializedName("uuid")
   private UUID uuid = null;

@@ -26,7 +26,6 @@ import java.util.List;
  * REST API Error.
  */
 @ApiModel(description = "REST API Error.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class RestApiError {
   @SerializedName("code")
   private String code = null;

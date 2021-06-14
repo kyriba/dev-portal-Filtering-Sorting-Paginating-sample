@@ -24,7 +24,6 @@ import com.kyriba.sample.model.ReferenceModel;
  * Account payment instructions.
  */
 @ApiModel(description = "Account payment instructions.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class AccountPaymentInstructions {
   @SerializedName("mainCorrespondentBankBranch")
   private ReferenceModel mainCorrespondentBankBranch = null;

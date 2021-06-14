@@ -13,13 +13,9 @@
 
 package com.kyriba.sample.model;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.google.common.reflect.TypeToken;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModelProperty;
-import com.kyriba.sample.model.accounts.AccountSearchModel;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

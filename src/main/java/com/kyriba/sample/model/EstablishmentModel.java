@@ -23,7 +23,6 @@ import io.swagger.annotations.ApiModelProperty;
  * Establishment.
  */
 @ApiModel(description = "Establishment.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class EstablishmentModel {
   @SerializedName("establishment")
   private ReferenceModel establishment = null;

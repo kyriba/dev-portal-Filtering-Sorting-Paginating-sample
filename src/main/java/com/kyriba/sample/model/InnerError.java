@@ -23,7 +23,6 @@ import io.swagger.annotations.ApiModelProperty;
  * An object containing more specific information than the current object about the error.
  */
 @ApiModel(description = "An object containing more specific information than the current object about the error.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class InnerError {
   @SerializedName("code")
   private String code = null;

@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * AddressModel_
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
+
 public class AddressModel_ {
   @SerializedName("city")
   private String city = null;

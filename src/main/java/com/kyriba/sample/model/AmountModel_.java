@@ -23,7 +23,7 @@ import java.math.BigDecimal;
 /**
  * AmountModel_
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
+
 public class AmountModel_ {
   @SerializedName("currency")
   private ReferenceModel currency = null;

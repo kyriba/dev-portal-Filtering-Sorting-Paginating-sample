@@ -23,7 +23,6 @@ import io.swagger.annotations.ApiModelProperty;
  * REST API Error Response.
  */
 @ApiModel(description = "REST API Error Response.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
 public class RestApiErrorResponse {
   @SerializedName("error")
   private RestApiError error = null;

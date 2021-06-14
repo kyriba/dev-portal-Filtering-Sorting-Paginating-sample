@@ -24,7 +24,6 @@ import java.util.Objects;
  * Address without homepage
  */
 @ApiModel(description = "Address without homepage")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-28T20:08:11.883Z")
 public class AddressWithoutHomepageModel {
   @SerializedName("city")
   private String city = null;

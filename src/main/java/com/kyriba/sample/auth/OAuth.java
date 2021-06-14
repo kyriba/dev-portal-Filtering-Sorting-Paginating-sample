@@ -18,7 +18,7 @@ import com.kyriba.sample.Pair;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-05-13T11:35:10.236Z")
+
 public class OAuth implements Authentication {
   private String accessToken;
 
