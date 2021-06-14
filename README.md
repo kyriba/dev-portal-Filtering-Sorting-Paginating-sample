@@ -50,10 +50,12 @@ Go to the link:
 ```shell
 http://localhost:5000/list
 ```
+> ⚠️  _To change the port, go to .../src/main/resources/application.yml and replace the "port" value._
+
 
 If everything was done accordingly with provided steps, the result should look as presented in the image below:
+
 ![img.png](img.png)
 
-> ⚠️  _To change the port, go to .../src/main/resources/application.yml and replace the "port" value._
 
 To terminate application press Ctrl + C and execute Y.
