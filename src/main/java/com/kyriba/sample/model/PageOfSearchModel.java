@@ -31,7 +31,6 @@ public class PageOfSearchModel<T>{
     @SerializedName("results")
     private List<T> results = null;
 
-    private T type;
 
     public PageOfSearchModel<T> metadata(Metadata metadata) {
         this.metadata = metadata;

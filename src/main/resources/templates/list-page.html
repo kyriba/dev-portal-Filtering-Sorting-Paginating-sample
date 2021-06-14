@@ -40,15 +40,7 @@
             <th>Value</th>
             </thead>
             <tbody>
-            <!--                <tr>-->
-            <!--                    <td> activeStatus</td>-->
-            <!--                    <td>-->
-            <!--                        <select id="activeStatus" name="activeStatus">-->
-            <!--                            <option value="">&#45;&#45;</option>-->
-            <!--                            <option th:each="status: ${activeStatus}" th:text="${status}"></option>-->
-            <!--                        </select>-->
-            <!--                    </td>-->
-            <!--                </tr>-->
+
             <tr class = "filtering">
                 <td>filter</td>
                 <td class="filter_detail">
@@ -70,6 +62,7 @@
                         <option value="=ge=">&#8805;</option>
                     </select>
                     <input id="addInput1" name="addInput1" type="text">
+                    <select id="addSelect1" name="addSelect1" hidden></select>
                     <select id="addFiltersBtn1" onchange="addFilters(this, true)">
                         <option>Add</option>
                         <option>AND</option>
@@ -119,13 +112,12 @@
     </div>
 </div>
 <script th:inline="javascript">
-    const types = [[${accountTypes}]]
-    const statuses = [[${activeStatus}]]
+    const enums = [[${enums}]]
     const port = [[${port}]]
 </script>
-<script th:src = "@{/js/uri.js}"></script>
 <script th:src="@{/js/renderjson.js}"></script>
 <script th:src="@{/js/list-page.js}">
 </script>
+<script th:src = "@{/js/uri.js}"></script>
 </body>
 </html>

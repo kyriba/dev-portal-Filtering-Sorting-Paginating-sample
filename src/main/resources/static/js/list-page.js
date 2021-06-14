@@ -107,11 +107,8 @@ const createPagination = (url, data) => {
 
         a.innerText = (i + 1).toString()
         prev.after(li)
-        console.log(pageOffset)
-        console.log(currentUrl[i].searchParams.get('page.offset'))
-        console.log(currentUrl[i])
 
-        if (pageOffset == currentUrl[i].searchParams.get('page.offset')) {
+        if (pageOffset.toString() === currentUrl[i].searchParams.get('page.offset')) {
 
             li.classList.add('active')
         }
@@ -179,65 +176,51 @@ function removeField(elem) {
 const addInputField = (el) => {
     const type = el.value
     const operator = el.nextElementSibling
-    const input = el.nextElementSibling.nextElementSibling
-    if (input.tagName === 'SELECT') {
-        input.replaceWith(document.createElement('input'))
-    }
+    const input = operator.nextElementSibling
+    const select = input.nextElementSibling
     operator.value = '=='
-    input.setAttribute('placeholder', '')
-    input.setAttribute('type', 'text')
-    Array.from(operator.children)
-        .map(op => op.hidden = false)
-    if (type.toLowerCase().includes('date')) {
-        input.setAttribute('type', 'date')
-        let oper = ['Equals', '<', '>', '≤', '≥']
-        Array.from(operator.children).filter(op => !oper.includes(op.textContent))
-            .map(op => op.hidden = true)
-    }
-    if (type.includes('uuid')) {
-        input.setAttribute('placeholder', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
-        let uuidOp = ['Equals', 'Doesn\'t equal', 'Starts with', 'Ends with', 'Contains', 'In List', 'Isn\'t in List']
-        Array.from(operator.children).filter(op => !uuidOp.includes(op.textContent))
-            .map(op => op.hidden = true)
+    if (enums && !enums.hasOwnProperty(type)) {
+        select.hidden = true
+        input.hidden = false
+        input.setAttribute('placeholder', '')
+        input.setAttribute('type', 'text')
+        input.value = ''
+        Array.from(operator.children)
+            .map(op => op.hidden = false)
+        if (type.toLowerCase().includes('date')) {
+            input.setAttribute('type', 'date')
+            let oper = ['Equals', '<', '>', '≤', '≥']
+            Array.from(operator.children).filter(op => !oper.includes(op.textContent))
+                .map(op => op.hidden = true)
+        }
+        if (type.includes('uuid')) {
+            input.setAttribute('placeholder', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+            let uuidOp = ['Equals', 'Doesn\'t equal', 'Starts with', 'Ends with', 'Contains', 'In List', 'Isn\'t in List']
+            Array.from(operator.children).filter(op => !uuidOp.includes(op.textContent))
+                .map(op => op.hidden = true)
+        }
     }
 
-    if (type === 'accountType') {
+    if (enums && enums.hasOwnProperty(type)) {
+        input.hidden = true
+        select.hidden = false
+        select.innerHTML = ''
         Array.from(operator.children).filter(op => op.textContent !== 'Equals')
             .map(op => op.hidden = true)
-        const select = document.createElement('select')
-        select.id = 'addInput' + operator.id.replaceAll(/[a-zA-Z-_]/g, '')
         let tr = el
         while (tr.tagName !== 'TR') {
             tr = tr.parentElement
         }
-
+        let types = enums[type]
+        select.value = select.selectedOptions.innerText
         for (let i = 0; i < types.length; i++) {
             const option = document.createElement('option')
             option.innerText = types[i]
             select.appendChild(option)
-        }
 
-        operator.nextElementSibling.replaceWith(select)
+        }
     }
 
-    if (type === 'activeStatus') {
-        Array.from(operator.children).filter(op => op.textContent !== 'Equals')
-            .map(op => op.hidden = true)
-        const select = document.createElement('select')
-        select.id = 'addInput' + operator.id.replaceAll(/[a-zA-Z-_]/g, '')
-        let tr = el
-        while (tr.tagName !== 'TR') {
-            tr = tr.parentElement
-        }
-
-        for (let i = 0; i < statuses.length; i++) {
-            const option = document.createElement('option')
-            option.innerText = statuses[i]
-            select.appendChild(option)
-        }
-
-        operator.nextElementSibling.replaceWith(select)
-    }
 }
 
 const showList = (el) => {
@@ -268,21 +251,25 @@ const addFilters = (el) => {
                 const l = parseInt(k, 10) + 1
                 children[i].id = children[i].id.replaceAll(/[0-9]+/g, l.toString())
                 if (children[i].id.startsWith('addInput')) {
-                    if (children[i].tagName === 'SELECT') {
-                        children[i].replaceWith(document.createElement('input'))
-                    }
                     children[i].value = ''
+                    children[i].hidden = false
                     children[i].setAttribute('placeholder', '')
                     children[i].setAttribute('type', 'text')
+                }
+                if (children[i].id.startsWith('addSelect')){
+                    children[i].hidden = true
+                    children[i].innerHTML = ''
+                    children[i].value = ''
                 }
             }
             tr.after(clone)
             Array.from(clone.querySelector('.filter_detail').children).forEach(e => {
                     console.log(e)
                     e.addEventListener(e.tagName === 'SELECT' ? 'change' : e.tagName === 'INPUT' ? 'input' : '', event => {
-                        addToQueryString(event.target)
+
                         if (e.id.startsWith('filter_column'))
                             addInputField(event.target)
+                        addToQueryString(event.target)
                     })
                 }
             )
@@ -344,10 +331,14 @@ const combineFilters = () => {
 
             }
 
-            if (fields[j].id.startsWith('addInput') && !arr.includes(fields[j].previousElementSibling.value)) {
+            if (fields[j].id.startsWith('addInput') && !arr.includes(fields[j].previousElementSibling.value) && fields[j].hidden === false) {
                 rsql = rsql + fields[j].value
-
             }
+
+            if (fields[j].id.startsWith('addSelect') && fields[j].hidden === false) {
+                rsql = rsql + fields[j].value
+            }
+
 
             if (fields[j].id.startsWith('addFiltersBtn') && fields[j].value !== 'Add') {
                 rsql = rsql + ' ' + fields[j].value.toLowerCase() + ' '

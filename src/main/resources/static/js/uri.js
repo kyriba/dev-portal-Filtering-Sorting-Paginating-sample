@@ -8,10 +8,10 @@ const pageOffset = document.querySelector('#pageOffset')
 const pageLimit = document.querySelector('#pageLimit')
 
 for (let i = 0; i < filter.length; i++) {
-    Array.from(filter[i].children).forEach(e => e.addEventListener(e.tagName === 'SELECT' ? 'change' : e.tagName === 'INPUT'? 'input' : '', event => {
-            addToQueryString(event.target)
+    Array.from(filter[i].children).forEach(e => e.addEventListener(e.tagName === 'SELECT' ? 'change' : e.tagName === 'INPUT' ? 'input' : '', event => {
             if (e.id.startsWith('filter_column'))
                 addInputField(event.target)
+            addToQueryString(event.target)
         }
     ))
 }
