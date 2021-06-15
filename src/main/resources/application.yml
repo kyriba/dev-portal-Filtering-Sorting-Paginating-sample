@@ -31,7 +31,7 @@ api:
       - bank.code
       - currency.uuid
       - currency.code
-      - country.code
+      - countryCode
       - accountType
       - banCode
       - creationDate

@@ -13,6 +13,11 @@
 
 package com.kyriba.sample;
 
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.reflect.TypeToken;
+import com.kyriba.sample.model.PageOfSearchModel;
+import com.kyriba.sample.model.accounts.AccountSearchModel;
 import com.squareup.okhttp.*;
 import com.squareup.okhttp.internal.http.HttpMethod;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;

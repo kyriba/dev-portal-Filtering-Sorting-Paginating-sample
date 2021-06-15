@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.kyriba.sample.annotation.SearchModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import com.kyriba.sample.model.ReferenceModel;
@@ -31,6 +32,7 @@ import org.threeten.bp.LocalDate;
  * Account search
  */
 @ApiModel(description = "Account search")
+@SearchModel
 public class AccountSearchModel {
 
   @SerializedName("uuid")

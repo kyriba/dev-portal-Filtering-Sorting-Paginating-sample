@@ -14,6 +14,7 @@
 package com.kyriba.sample.model.bank_branches;
 
 import com.google.gson.annotations.SerializedName;
+import com.kyriba.sample.annotation.SearchModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import com.kyriba.sample.model.ReferenceModel;
@@ -26,7 +27,7 @@ import java.util.UUID;
  * Bank branch
  */
 @ApiModel(description = "Bank branch")
-
+@SearchModel
 public class BankBranchSearchModel {
   @SerializedName("uuid")
   private UUID uuid = null;
@@ -106,7 +107,7 @@ public class BankBranchSearchModel {
    * Bank branch&#39;s code.
    * @return code
   **/
-  @ApiModelProperty(example = "CODE01", required = true, value = "Bank branch's code.")
+  @ApiModelProperty(required = true, value = "Code of the bank group.")
   public String getCode() {
     return code;
   }

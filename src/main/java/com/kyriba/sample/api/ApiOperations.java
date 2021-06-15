@@ -16,6 +16,7 @@ package com.kyriba.sample.api;
 import com.google.gson.reflect.TypeToken;
 import com.kyriba.sample.*;
 import com.kyriba.sample.model.PageOfSearchModel;
+import com.kyriba.sample.ApiUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +34,12 @@ public class ApiOperations<T> {
     @Value("${request.mapping}")
     private String requestMapping;
 
+    private final ApiUtils apiUtils;
 
-    public ApiOperations(ApiClient apiClient) {
+
+    public ApiOperations(ApiClient apiClient, ApiUtils apiUtils) {
         this.apiClient = apiClient;
+        this.apiUtils = apiUtils;
     }
 
     public ApiClient getApiClient() {
@@ -148,8 +152,7 @@ public class ApiOperations<T> {
      */
     public ApiResponse<PageOfSearchModel<T>> readAccountsUsingGET1WithHttpInfo(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
         com.squareup.okhttp.Call call = readAccountsUsingGET1ValidateBeforeCall(activeStatus, filter, pageLimit, pageOffset, sort, null, null);
-        Type localVarReturnType = new TypeToken<PageOfSearchModel<T>>() {
-        }.getType();
+        Type localVarReturnType = TypeToken.getParameterized(new TypeToken<PageOfSearchModel<T>>(){}.getRawType(), TypeToken.get(apiUtils.getSearchClass()).getRawType()).getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
