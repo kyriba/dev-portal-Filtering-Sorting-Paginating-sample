@@ -124,7 +124,7 @@ enums:
           - false
 
       banks:
-        intermediary:
+        intercompany:
           - true
           - false
 
