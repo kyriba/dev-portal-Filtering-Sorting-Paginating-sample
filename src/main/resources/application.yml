@@ -123,5 +123,18 @@ enums:
           - true
           - false
 
+      banks:
+        intermediary:
+          - true
+          - false
 
-
+      users:
+        paymentAdministrator:
+          - true
+          - false
+        systemAdministrator:
+          - true
+          - false
+        emailRecipient:
+          - true
+          - false

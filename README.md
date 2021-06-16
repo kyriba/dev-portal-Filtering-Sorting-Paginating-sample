@@ -44,6 +44,7 @@ java -jar "build/libs/filtering-sorting-pagination-1.0.0.jar"
 ```
 > ⚠️  _Please notice that the path to your local directory is provided in MacOS/Unix format. Windows is slash-sensitive, so if you are using a Windows system, replace "/" with "\\"._
 
+Choose the API from the provided list in the Terminal, by typing the exact name and pressing "Enter" button. Names are case-sensitive, make sure you write them in lower-case.
 
 Go to the link:
 
