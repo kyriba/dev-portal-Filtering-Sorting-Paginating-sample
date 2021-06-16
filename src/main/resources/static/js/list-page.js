@@ -74,8 +74,13 @@ const createPagination = (url, data) => {
         '    <li id = "nextPage">\n' +
         '        <a aria-hidden="true">&raquo;</a>\n' +
         '    </li>\n' +
+        '<p id = "total-pages" style="color: #337ab7">Total pages </p>\n' +
         '  </ul>\n' +
         '</nav>'
+
+
+    document.querySelector('#total-pages').textContent = document.querySelector('#total-pages').textContent + pages
+
     const prev = pagination.querySelector('#previousPage')
     const next = pagination.querySelector('#nextPage')
 
@@ -94,9 +99,9 @@ const createPagination = (url, data) => {
     }
 
     let currentUrl = []
-
-    for (let i = pages - 1; i >= 0; i--) {
-
+    let array = getPagingRange(pageOffset/pageLimit, {min: 0, total: pages, length: 10}).reverse()
+    array.forEach(i => {
+        console.log(i)
         let li = document.createElement('li')
         let a = document.createElement('a')
         li.appendChild(a)
@@ -105,14 +110,14 @@ const createPagination = (url, data) => {
 
         li.onclick = () => sendRequestToGetAccounts(currentUrl[i])
 
-        a.innerText = (i + 1).toString()
+        a.innerText = (parseInt(i) + 1).toString()
         prev.after(li)
 
         if (pageOffset.toString() === currentUrl[i].searchParams.get('page.offset')) {
 
             li.classList.add('active')
         }
-    }
+    })
 
     if (!data.metadata.links.prev) {
         prev.classList.add('disable')
@@ -127,6 +132,16 @@ const createPagination = (url, data) => {
             if (!x.parentElement.classList.contains('disable')) x.style.cursor = 'pointer'
             x.style.userSelect = 'none'
         })
+}
+
+function getPagingRange(current, {min = 1, total = 10, length = 10} = {}) {
+    if (length > total) length = total;
+
+    let start = current - Math.floor(length / 2);
+    start = Math.max(start, min);
+    start = Math.min(start, min + total - length);
+
+    return Array.from({length: length}, (el, i) => start + i);
 }
 
 
@@ -186,12 +201,21 @@ const addInputField = (el) => {
         input.setAttribute('type', 'text')
         input.value = ''
         Array.from(operator.children)
-            .map(op => op.hidden = false)
+            .filter(op => op.textContent !== 'isNull')
+            .map(op => {
+                op.hidden = false
+            console.log(op.textContent)})
+        Array.from(operator.children)
+            .filter(op => op.textContent === 'isNull')
+            .map(op => op.hidden = true)
         if (type.toLowerCase().includes('date')) {
             input.setAttribute('type', 'date')
-            let oper = ['Equals', '<', '>', '≤', '≥']
+            let oper = ['Equals', '<', '>', '≤', '≥', 'isNull']
             Array.from(operator.children).filter(op => !oper.includes(op.textContent))
                 .map(op => op.hidden = true)
+            Array.from(operator.children).filter(op => oper.includes(op.textContent))
+                .map(op => op.hidden = false)
+
         }
         if (type.includes('uuid')) {
             input.setAttribute('placeholder', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
