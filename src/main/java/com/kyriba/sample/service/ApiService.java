@@ -2,6 +2,7 @@ package com.kyriba.sample.service;
 
 
 import com.kyriba.sample.model.PageOfSearchModel;
+
 import java.util.List;
 
 public interface ApiService<T> {

@@ -45,8 +45,10 @@ public class BankGroupModel {
         return this;
     }
 
-     /**List of banks.
-      * @return banks
+    /**
+     * List of banks.
+     *
+     * @return banks
      */
     @ApiModelProperty(required = true, value = "List of banks.")
     public List<ReferenceModel> getBanks() {
@@ -64,6 +66,7 @@ public class BankGroupModel {
 
     /**
      * Bank group&#39;s code.
+     *
      * @return code
      **/
     @ApiModelProperty(required = true, value = "Bank branch's code.")
@@ -82,6 +85,7 @@ public class BankGroupModel {
 
     /**
      * Counterparty's contact. If counterparty is false, contact should be empty.
+     *
      * @return contact
      **/
     @ApiModelProperty(value = "Counterparty's contact. If counterparty is false, contact should be empty.")
@@ -92,6 +96,7 @@ public class BankGroupModel {
     public void setContact(String contact) {
         this.contact = contact;
     }
+
     public BankGroupModel counterparty(boolean counterparty) {
         this.counterparty = counterparty;
         return this;

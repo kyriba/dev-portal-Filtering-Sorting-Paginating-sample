@@ -39,7 +39,7 @@ public class ApiController<T> {
     }
 
     @GetMapping
-    public String getAccounts(Model model){
+    public String getAccounts(Model model) {
 
         model.addAttribute("enums", availableValuesService.getValuesForCurrentApi());
         model.addAttribute("columns", filtersService.getFilters());
@@ -51,12 +51,12 @@ public class ApiController<T> {
 
     @GetMapping("/get")
     @ResponseBody
-    public ResponseEntity<PageOfSearchModel<T>> getAccountsJson(@RequestParam (value = "activeStatus", required = false) String activeStatus,
-                                                             @RequestParam (value = "filter", required = false) String filter,
-                                                             @RequestParam (value = "page.limit", required = false) Integer pageLimit,
-                                                             @RequestParam (value = "page.offset", required = false) Integer pageOffset,
-                                                             @RequestParam(value = "sort", required = false) List<String> sort)
-    throws BadRequestException {
+    public ResponseEntity<PageOfSearchModel<T>> getAccountsJson(@RequestParam(value = "activeStatus", required = false) String activeStatus,
+                                                                @RequestParam(value = "filter", required = false) String filter,
+                                                                @RequestParam(value = "page.limit", required = false) Integer pageLimit,
+                                                                @RequestParam(value = "page.offset", required = false) Integer pageOffset,
+                                                                @RequestParam(value = "sort", required = false) List<String> sort)
+            throws BadRequestException {
         PageOfSearchModel<T> result = apiService.getAllAccounts(activeStatus, filter, pageLimit, pageOffset, sort);
         return new ResponseEntity<>(result,
                 HttpStatus.OK);

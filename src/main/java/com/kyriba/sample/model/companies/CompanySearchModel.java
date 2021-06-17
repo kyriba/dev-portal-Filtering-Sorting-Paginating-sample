@@ -3,7 +3,6 @@ package com.kyriba.sample.model.companies;
 import com.google.gson.annotations.SerializedName;
 import com.kyriba.sample.annotation.SearchModel;
 import com.kyriba.sample.model.ReferenceModel;
-import com.kyriba.sample.model.banks.BankSearchModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -13,7 +12,7 @@ import java.util.Objects;
 @ApiModel(value = "Company")
 public class CompanySearchModel {
     @SerializedName(value = "code")
-    private  String code = null;
+    private String code = null;
 
     @SerializedName(value = "shortCode")
     private String shortCode = null;
@@ -45,7 +44,7 @@ public class CompanySearchModel {
     }
 
     /**
-     *Company's address.
+     * Company's address.
      *
      * @return address
      **/
@@ -64,7 +63,6 @@ public class CompanySearchModel {
     }
 
     /**
-     *
      * @return businessIdentifiers
      **/
     @ApiModelProperty()
@@ -82,7 +80,8 @@ public class CompanySearchModel {
     }
 
     /**
-     *The code that represents the company.
+     * The code that represents the company.
+     *
      * @return code
      **/
     @ApiModelProperty(example = "COMPANY01", required = true, value = "The code that represents the company.")
@@ -117,7 +116,8 @@ public class CompanySearchModel {
     }
 
     /**
-     *The name of the company.
+     * The name of the company.
+     *
      * @return description1
      **/
     @ApiModelProperty(example = "ABC Corp", value = "The name of the company.")
@@ -135,7 +135,8 @@ public class CompanySearchModel {
     }
 
     /**
-     *Other name of the company.
+     * Other name of the company.
+     *
      * @return description2
      **/
     @ApiModelProperty(example = "Other name", value = "Other name of the company.")
@@ -153,8 +154,9 @@ public class CompanySearchModel {
     }
 
     /**
-     *The code, using Latin characters only, that represents the company and that is used in the interfaces that only support Latin characters (example: in some bank connectivity configurations).
+     * The code, using Latin characters only, that represents the company and that is used in the interfaces that only support Latin characters (example: in some bank connectivity configurations).
      * If empty then field "code" is used (provided that it only contains Latin characters).
+     *
      * @return interfaceCode
      **/
     @ApiModelProperty(example = "ERP01", required = true, value = "The code, using Latin characters only, that represents the company and that is used in the interfaces that only support Latin characters (example: in some bank connectivity configurations).\n" +
@@ -173,8 +175,9 @@ public class CompanySearchModel {
     }
 
     /**
-     *The short code that represents this company in automatically-generated Transaction
-     *  numbers (Transaction numbers are made up of the Short company code, a Transaction code, a numeric counter).
+     * The short code that represents this company in automatically-generated Transaction
+     * numbers (Transaction numbers are made up of the Short company code, a Transaction code, a numeric counter).
+     *
      * @return shortCode
      **/
     @ApiModelProperty(example = "C01", required = true, value = "The short code that represents this company in automatically-generated Transaction numbers (Transaction numbers are made up of the Short company code, a Transaction code, a numeric counter).")
@@ -192,7 +195,8 @@ public class CompanySearchModel {
     }
 
     /**
-     *UUID of the company.
+     * UUID of the company.
+     *
      * @return uuid
      **/
     @ApiModelProperty(example = "uuid", value = "UUID of the company.")

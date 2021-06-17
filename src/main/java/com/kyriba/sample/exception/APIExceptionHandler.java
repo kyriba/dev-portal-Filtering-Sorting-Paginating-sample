@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class AccountAPIExceptionHandler {
+public class APIExceptionHandler {
 
 
     @ExceptionHandler(value = BadRequestException.class)
-    public ResponseEntity<BadRequestException> getErrorResponse(BadRequestException e){
+    public ResponseEntity<BadRequestException> getErrorResponse(BadRequestException e) {
         return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
     }
 }

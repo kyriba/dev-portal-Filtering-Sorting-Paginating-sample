@@ -19,6 +19,7 @@ public class BusinessIdentifiersForCompanyLight {
 
     /**
      * Id assigned by another institution.
+     *
      * @return otherIdentifierValue
      **/
     @ApiModelProperty(example = "1", required = true, value = "Id assigned by another institution.")
@@ -37,7 +38,7 @@ public class BusinessIdentifiersForCompanyLight {
 
     /**
      * Value of the identifier that corresponds to the selected otherIdentifierType.
-
+     *
      * @return otherIdentifierValue
      **/
     @ApiModelProperty(example = "20-1234567", value = "Value of the identifier that corresponds to the selected otherIdentifierType.")

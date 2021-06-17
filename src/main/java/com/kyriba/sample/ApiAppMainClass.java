@@ -3,7 +3,10 @@ package com.kyriba.sample;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Properties;
+import java.util.Scanner;
 
 
 @SpringBootApplication
@@ -43,7 +46,7 @@ public class ApiAppMainClass {
                 name = name.substring(1);
             }
             name = name.trim();
-            if (!list.contains(name)){
+            if (!list.contains(name)) {
                 System.out.println("Api with name " + input + " not found.");
             }
         }

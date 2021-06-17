@@ -13,20 +13,15 @@
 
 package com.kyriba.sample;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.reflect.TypeToken;
-import com.kyriba.sample.model.PageOfSearchModel;
-import com.kyriba.sample.model.accounts.AccountSearchModel;
-import com.squareup.okhttp.*;
-import com.squareup.okhttp.internal.http.HttpMethod;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import com.kyriba.sample.auth.ApiKeyAuth;
 import com.kyriba.sample.auth.Authentication;
 import com.kyriba.sample.auth.HttpBasicAuth;
 import com.kyriba.sample.auth.OAuth;
 import com.kyriba.sample.exception.InvalidTokenException;
+import com.squareup.okhttp.*;
+import com.squareup.okhttp.internal.http.HttpMethod;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import okio.BufferedSink;
 import okio.Okio;
 import org.springframework.beans.factory.annotation.Value;
@@ -934,7 +929,7 @@ public class ApiClient {
                     throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap());
                 }
             }
-            if (response.code() == 401){
+            if (response.code() == 401) {
                 throw new InvalidTokenException(response.message());
             } else {
                 throw new ApiException(response.message(), response.code(), response.headers().toMultimap(), respBody);

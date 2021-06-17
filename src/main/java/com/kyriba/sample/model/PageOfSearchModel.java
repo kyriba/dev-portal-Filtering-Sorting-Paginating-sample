@@ -24,7 +24,7 @@ import java.util.Objects;
  * PageOfSearchModels
  */
 
-public class PageOfSearchModel<T>{
+public class PageOfSearchModel<T> {
     @SerializedName("metadata")
     private Metadata metadata = null;
 
@@ -39,6 +39,7 @@ public class PageOfSearchModel<T>{
 
     /**
      * Get metadata
+     *
      * @return metadata
      **/
     @ApiModelProperty(value = "")
@@ -65,6 +66,7 @@ public class PageOfSearchModel<T>{
 
     /**
      * Get results
+     *
      * @return results
      **/
     @ApiModelProperty(value = "")

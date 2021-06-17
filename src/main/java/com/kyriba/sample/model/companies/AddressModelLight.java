@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class AddressModelLight {
 
     @SerializedName(value = "country")
-    private ReferenceModel country  = null;
+    private ReferenceModel country = null;
 
     public AddressModelLight country(ReferenceModel country) {
         this.country = country;
@@ -18,6 +18,7 @@ public class AddressModelLight {
 
     /**
      * Country.
+     *
      * @return country
      **/
     @ApiModelProperty(required = true, value = "Country")

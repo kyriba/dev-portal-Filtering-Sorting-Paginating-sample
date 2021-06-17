@@ -131,7 +131,7 @@ const createPagination = (url, data) => {
     let currentUrl = new URL(url)
 
     currentPage.onchange = () => {
-        if (currentPage.value <= 0){
+        if (currentPage.value <= 0) {
             currentPage.value = 1
         }
         if (currentPage.value > pages) {
@@ -413,17 +413,17 @@ for (let i = 0; i < popups.length; i++) {
 }
 
 const copyCurl = document.querySelector('#copyCurl')
-    copyCurl.onclick = el => {
+copyCurl.onclick = el => {
 
-   const copyText = document.querySelector('#basic-url')
-        copyText.disabled = false
+    const copyText = document.querySelector('#basic-url')
+    copyText.disabled = false
 
     copyText.select()
 
 
     document.execCommand("copy")
-        copyText.disabled = true
-        window.getSelection().removeAllRanges();
+    copyText.disabled = true
+    window.getSelection().removeAllRanges();
 
     el.target.style.display = 'none'
     el.target.nextElementSibling.hidden = false

@@ -3,7 +3,6 @@ package com.kyriba.sample.model.users;
 import com.google.gson.annotations.SerializedName;
 import com.kyriba.sample.annotation.SearchModel;
 import com.kyriba.sample.model.ReferenceModel;
-import com.kyriba.sample.model.banks.BankSearchModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -60,7 +59,6 @@ public class UserSearchModel {
     }
 
     /**
-     *
      * @return accessProfile
      **/
     @ApiModelProperty(required = true)
@@ -97,7 +95,6 @@ public class UserSearchModel {
     }
 
     /**
-     *
      * @return companyOwnership
      **/
     @ApiModelProperty()
@@ -116,7 +113,6 @@ public class UserSearchModel {
     }
 
     /**
-     *
      * @return dataPermissionProfile
      **/
     @ApiModelProperty()
@@ -139,7 +135,7 @@ public class UserSearchModel {
      *
      * @return description
      **/
-    @ApiModelProperty(example = "User's Description.",  value = "User's Description.")
+    @ApiModelProperty(example = "User's Description.", value = "User's Description.")
     public String getDescription() {
         return description;
     }
@@ -158,7 +154,7 @@ public class UserSearchModel {
      *
      * @return email
      **/
-    @ApiModelProperty(example = "mail@gmail.com",required = true,  value = "User's Email address.")
+    @ApiModelProperty(example = "mail@gmail.com", required = true, value = "User's Email address.")
     public String getEmail() {
         return email;
     }
@@ -197,7 +193,7 @@ public class UserSearchModel {
      *
      * @return firstName
      **/
-    @ApiModelProperty(example = "FirstName",required = true,  value = "User's First name.")
+    @ApiModelProperty(example = "FirstName", required = true, value = "User's First name.")
     public String getFirstName() {
         return firstName;
     }
@@ -216,7 +212,7 @@ public class UserSearchModel {
      *
      * @return interfaceCode
      **/
-    @ApiModelProperty(example = "CODE01",required = true,  value = "User's Interface code.")
+    @ApiModelProperty(example = "CODE01", required = true, value = "User's Interface code.")
     public String getInterfaceCode() {
         return interfaceCode;
     }
@@ -235,7 +231,7 @@ public class UserSearchModel {
      *
      * @return lastName
      **/
-    @ApiModelProperty(example = "Lastname",required = true,  value = "User's Last name.")
+    @ApiModelProperty(example = "Lastname", required = true, value = "User's Last name.")
     public String getLastName() {
         return lastName;
     }

@@ -211,6 +211,7 @@ public class BankSearchModel {
 
     /**
      * Name of the bank.
+     *
      * @return description
      **/
     @ApiModelProperty(example = "Bank description", value = "Name of the bank.")
@@ -221,6 +222,7 @@ public class BankSearchModel {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public BankSearchModel externalCode(String externalCode) {
         this.externalCode = externalCode;
         return this;

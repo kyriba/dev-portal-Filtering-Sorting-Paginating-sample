@@ -8,14 +8,11 @@ import com.google.gson.stream.JsonWriter;
 import com.kyriba.sample.model.AmountModel_;
 import com.kyriba.sample.model.ReferenceModel;
 import com.kyriba.sample.model.UserZones;
-import com.kyriba.sample.model.accounts.AccountSearchModel;
 import com.kyriba.sample.model.bank_branches.AddressModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Objects;
 
 @ApiModel(description = "Bank.")
 public class Bank {
@@ -23,13 +20,13 @@ public class Bank {
     private AddressModel address = null;
 
     @SerializedName(value = "bic")
-    private String bic	= null;
+    private String bic = null;
 
     @SerializedName(value = "cashExposureLimit")
     private AmountModel_ cashExposureLimit = null;
 
     @SerializedName(value = "cashExposureLimitPercentage")
-     private double cashExposureLimitPercentage = 0;
+    private double cashExposureLimitPercentage = 0;
 
     @SerializedName(value = "code")
     private String code = null;
@@ -38,7 +35,7 @@ public class Bank {
     private String contact = null;
 
     @SerializedName(value = "counterPartyInfo")
-    private	boolean counterPartyInfo = false;
+    private boolean counterPartyInfo = false;
 
     @SerializedName(value = "dealIdentifier")
     private String dealIdentifier = null;
@@ -47,10 +44,10 @@ public class Bank {
     private ReferenceModel defaultGroup = null;
 
     @SerializedName(value = "description1")
-    private  String description1 = null;
+    private String description1 = null;
 
     @SerializedName(value = "description2")
-    private  String description2 = null;
+    private String description2 = null;
 
     @SerializedName(value = "externalCode")
     private String externalCode = null;
@@ -130,13 +127,13 @@ public class Bank {
     private boolean netSettlements = false;
 
     @SerializedName(value = "parentCounterparty")
-    private  ReferenceModel parentCounterparty = null;
+    private ReferenceModel parentCounterparty = null;
 
     @SerializedName(value = "riskTier")
-    private  ReferenceModel riskTier = null;
+    private ReferenceModel riskTier = null;
 
     @SerializedName(value = "thirdParty")
-    private  ReferenceModel thirdParty = null;
+    private ReferenceModel thirdParty = null;
 
     @SerializedName(value = "urlAddress")
     private String urlAddress = null;
@@ -154,6 +151,7 @@ public class Bank {
 
     /**
      * Bank address.
+     *
      * @return address
      **/
     @ApiModelProperty(required = true, value = "Bank address.")
@@ -172,6 +170,7 @@ public class Bank {
 
     /**
      * Bank identifier code.
+     *
      * @return bic
      **/
     @ApiModelProperty(value = "Bank identifier code.")
@@ -190,6 +189,7 @@ public class Bank {
 
     /**
      * Bank cashExposureLimit.
+     *
      * @return cashExposureLimit
      **/
     @ApiModelProperty(value = "Bank cashExposureLimit")
@@ -208,6 +208,7 @@ public class Bank {
 
     /**
      * Cash exposure limit percentage.
+     *
      * @return cashExposureLimitPercentage
      **/
     @ApiModelProperty(example = "1.123456", value = "Cash exposure limit percentage.")
@@ -226,6 +227,7 @@ public class Bank {
 
     /**
      * Code that represents the bank.
+     *
      * @return code
      **/
     @ApiModelProperty(example = "BANK001", required = true, value = "Code that represents the bank.")
@@ -244,6 +246,7 @@ public class Bank {
 
     /**
      * Contact of the bank.
+     *
      * @return contact
      **/
     @ApiModelProperty(example = "contact", value = "Contact of the bank.")
@@ -262,6 +265,7 @@ public class Bank {
 
     /**
      * Flag to select banks with Counterparty info (true) or without Counterparty info (false).
+     *
      * @return counterPartyInfo
      **/
     @ApiModelProperty(example = "true", value = "Flag to select banks with Counterparty info (true) or without Counterparty info (false).")
@@ -280,6 +284,7 @@ public class Bank {
 
     /**
      * Bank's Deal identifier.
+     *
      * @return dealIdentifier
      **/
     @ApiModelProperty(example = "Deal identifier", value = "Bank's Deal identifier.")
@@ -298,6 +303,7 @@ public class Bank {
 
     /**
      * Bank's defaultGroup.
+     *
      * @return defaultGroup
      **/
     @ApiModelProperty(value = "Bank's defaultGroup.")
@@ -316,6 +322,7 @@ public class Bank {
 
     /**
      * Name of the bank.
+     *
      * @return description1
      **/
     @ApiModelProperty(example = "Bank description", value = "Name of the bank.")
@@ -334,6 +341,7 @@ public class Bank {
 
     /**
      * Other name of the bank.
+     *
      * @return description2
      **/
     @ApiModelProperty(example = "Bank description2", value = "Other name of the bank.")
@@ -352,6 +360,7 @@ public class Bank {
 
     /**
      * Bank's External code.
+     *
      * @return externalCode
      **/
     @ApiModelProperty(example = "External code", value = "Bank's External code.")
@@ -370,6 +379,7 @@ public class Bank {
 
     /**
      * FX confirmation method.
+     *
      * @return fxConfirmationMethod
      **/
     @ApiModelProperty(example = "ELECTRONIC", value = "FX confirmation method.")
@@ -388,6 +398,7 @@ public class Bank {
 
     /**
      * Flag to select Intercompany (true) or non-Intercompany (false) banks.
+     *
      * @return intercompany
      **/
     @ApiModelProperty(example = "true", value = "Flag to select Intercompany (true) or non-Intercompany (false) banks.")
@@ -406,6 +417,7 @@ public class Bank {
 
     /**
      * Code, using Latin characters only, that represents the bank and that is used in the interfaces that only support Latin characters (example: in some bank connectivity configurations).
+     *
      * @return interfaceCode
      **/
     @ApiModelProperty(example = "BANK1", required = true, value = "Code, using Latin characters only, that represents the bank and that is used in the interfaces that only support Latin characters (example: in some bank connectivity configurations).")
@@ -424,6 +436,7 @@ public class Bank {
 
     /**
      * Flag to select banks with Intermediary info (true) or without Intermediary info (false).
+     *
      * @return intermediaryInfo
      **/
     @ApiModelProperty(example = "true", value = "Flag to select banks with Intermediary info (true) or without Intermediary info (false).")
@@ -442,6 +455,7 @@ public class Bank {
 
     /**
      * Is internal counter party.
+     *
      * @return internalCounterparty
      **/
     @ApiModelProperty(example = "true", value = "Is internal counter party.")
@@ -460,6 +474,7 @@ public class Bank {
 
     /**
      * Identification code for legal entities.
+     *
      * @return lei
      **/
     @ApiModelProperty(example = "5493006W6QFE1P0RU752", value = "Identification code for legal entities.")
@@ -478,6 +493,7 @@ public class Bank {
 
     /**
      * Loan confirmation method.
+     *
      * @return lei
      **/
     @ApiModelProperty(value = "Loan confirmation method.")
@@ -496,6 +512,7 @@ public class Bank {
 
     /**
      * Flag to select NetDebitAndCreditExposure (true) or non-NetDebitAndCreditExposure (false) banks.
+     *
      * @return netDebitAndCreditExposure
      **/
     @ApiModelProperty(example = "true", value = "Flag to select NetDebitAndCreditExposure (true) or non-NetDebitAndCreditExposure (false) banks.")
@@ -514,6 +531,7 @@ public class Bank {
 
     /**
      * Flag to select NetSettlements (true) or non-NetSettlements (false) banks.
+     *
      * @return netSettlements
      **/
     @ApiModelProperty(example = "true", value = "Flag to select NetSettlements (true) or non-NetSettlements (false) banks.")
@@ -532,6 +550,7 @@ public class Bank {
 
     /**
      * Bank's parentCounterparty.
+     *
      * @return parentCounterparty
      **/
     @ApiModelProperty(value = "Bank's parentCounterparty.")
@@ -550,6 +569,7 @@ public class Bank {
 
     /**
      * Bank's riskTier.
+     *
      * @return riskTier
      **/
     @ApiModelProperty(value = "Bank's riskTier.")
@@ -568,6 +588,7 @@ public class Bank {
 
     /**
      * Bank's thirdParty.
+     *
      * @return thirdParty
      **/
     @ApiModelProperty(value = "Bank's thirdParty.")
@@ -586,6 +607,7 @@ public class Bank {
 
     /**
      * URL address of the bank.
+     *
      * @return urlAddress
      **/
     @ApiModelProperty(example = "www.mycompany.com", value = "URL address of the bank.")
@@ -604,9 +626,10 @@ public class Bank {
 
     /**
      * URL address of the bank.
+     *
      * @return userZones
      **/
-    @ApiModelProperty( value = "User Zone")
+    @ApiModelProperty(value = "User Zone")
     public UserZones getUserZones() {
         return userZones;
     }
@@ -622,6 +645,7 @@ public class Bank {
 
     /**
      * Unique internal identifier that represents the bank.
+     *
      * @return uuid
      **/
     @ApiModelProperty(example = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", required = true, value = "Unique internal identifier that represents the bank.")

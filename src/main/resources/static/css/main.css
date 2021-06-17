@@ -1,22 +1,22 @@
 
-.main{
+.main {
     height: auto;
     margin-left: 100px;
     margin-top: 20px;
     padding-left: 20px;
 }
 
-.request{
+.request {
     margin-top: 20px;
     height: 34px;
 }
 
-.disable{
+.disable {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-.add_sorting{
+.add_sorting {
     display: inline;
     cursor: pointer;
     font-weight: normal;
@@ -24,7 +24,7 @@
     color: dimgray;
 }
 
-.remove_sorting, .remove_filter{
+.remove_sorting, .remove_filter {
     cursor: pointer;
     display: none;
     font-weight: normal;
@@ -32,7 +32,7 @@
     color: dimgray;
 }
 
-select{
+select {
     height: 25px;
     background-color: rgb(255, 255, 255);
     border-bottom-color: rgb(211, 211, 211);
@@ -55,7 +55,7 @@ select{
     box-sizing: border-box;
 }
 
-input{
+input {
     border-color: lightgray;
 }
 
