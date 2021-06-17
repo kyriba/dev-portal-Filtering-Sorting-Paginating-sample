@@ -423,6 +423,7 @@ const copyCurl = document.querySelector('#copyCurl')
 
     document.execCommand("copy")
         copyText.disabled = true
+        window.getSelection().removeAllRanges();
 
     el.target.style.display = 'none'
     el.target.nextElementSibling.hidden = false
