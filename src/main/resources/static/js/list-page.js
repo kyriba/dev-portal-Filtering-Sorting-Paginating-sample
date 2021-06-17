@@ -414,14 +414,15 @@ for (let i = 0; i < popups.length; i++) {
 
 const copyCurl = document.querySelector('#copyCurl')
     copyCurl.onclick = el => {
-    /* Get the text field */
-   const copyText = document.querySelector('#basic-url')
 
-    /* Select the text field */
+   const copyText = document.querySelector('#basic-url')
+        copyText.disabled = false
+
     copyText.select()
 
-    /* Copy the text inside the text field */
+
     document.execCommand("copy")
+        copyText.disabled = true
 
     el.target.style.display = 'none'
     el.target.nextElementSibling.hidden = false
