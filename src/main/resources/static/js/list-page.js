@@ -68,10 +68,21 @@ const createPagination = (url, data) => {
     pagination.innerHTML =
         '<nav aria-label="Page navigation">\n' +
         '  <ul class="pagination">\n' +
-        '    <li id = "previousPage">\n' +
+        '    <li id = "firstPage">\n' +
         '        <a aria-hidden="true">&laquo;</a>\n' +
         '    </li>\n' +
+        '    <li id = "previousPage">\n' +
+        '        <a aria-hidden="true">&lsaquo;</a>\n' +
+        '    </li>\n' +
+        '    <li>\n' +
+        '        <a aria-hidden="true">\n' +
+        '        <input id = "currentPage" aria-hidden="true">\n' +
+        '       </a>\n' +
+        '    </li>\n' +
         '    <li id = "nextPage">\n' +
+        '        <a aria-hidden="true">&rsaquo;</a>\n' +
+        '    </li>\n' +
+        '    <li id = "lastPage">\n' +
         '        <a aria-hidden="true">&raquo;</a>\n' +
         '    </li>\n' +
         '<p id = "total-pages" style="color: #337ab7">Total pages </p>\n' +
@@ -98,33 +109,47 @@ const createPagination = (url, data) => {
             sendRequestToGetAccounts(urlNext)
     }
 
-    let currentUrl = []
-    let array = getPagingRange(pageOffset/pageLimit, {min: 0, total: pages, length: 10}).reverse()
-    array.forEach(i => {
-        console.log(i)
-        let li = document.createElement('li')
-        let a = document.createElement('a')
-        li.appendChild(a)
-        currentUrl[i] = new URL(url)
-        currentUrl[i].searchParams.set('page.offset', pageLimit*i)
+    const first = pagination.querySelector('#firstPage')
+    const last = pagination.querySelector('#lastPage')
 
-        li.onclick = () => sendRequestToGetAccounts(currentUrl[i])
+    let urlFirst = new URL(url)
+    urlFirst.searchParams.set('page.offset', 0)
+    first.onclick = () => {
+        if (!first.classList.contains('disable'))
+            sendRequestToGetAccounts(urlFirst)
+    }
 
-        a.innerText = (parseInt(i) + 1).toString()
-        prev.after(li)
+    let urlLast = new URL(url)
+    urlLast.searchParams.set('page.offset', pageLimit * (pages - 1))
+    last.onclick = () => {
+        if (!last.classList.contains('disable'))
+            sendRequestToGetAccounts(urlLast)
+    }
 
-        if (pageOffset.toString() === currentUrl[i].searchParams.get('page.offset')) {
+    let currentPage = document.querySelector('#currentPage')
+    currentPage.value = pageOffset / pageLimit + 1
+    let currentUrl = new URL(url)
 
-            li.classList.add('active')
+    currentPage.onchange = () => {
+        if (currentPage.value <= 0){
+            currentPage.value = 1
         }
-    })
+        if (currentPage.value > pages) {
+            currentPage.value = pages
+        }
+        currentUrl.searchParams.set('page.offset', pageLimit * (parseInt(currentPage.value) - 1))
+        sendRequestToGetAccounts(currentUrl)
+    }
+
 
     if (!data.metadata.links.prev) {
         prev.classList.add('disable')
+        first.classList.add('disable')
     }
 
     if (!data.metadata.links.next) {
         next.classList.add('disable')
+        last.classList.add('disable')
     }
 
     Array.from(document.querySelector('.pagination').querySelectorAll('a'))
@@ -134,19 +159,7 @@ const createPagination = (url, data) => {
         })
 }
 
-function getPagingRange(current, {min = 1, total = 10, length = 10} = {}) {
-    if (length > total) length = total;
-
-    let start = current - Math.floor(length / 2);
-    start = Math.max(start, min);
-    start = Math.min(start, min + total - length);
-
-    return Array.from({length: length}, (el, i) => start + i);
-}
-
-
-
-const  addField = (elem) => {
+const addField = (elem) => {
     elem.style.display = 'none'
     let minus = elem.previousElementSibling
     minus.style.display = 'inline'
@@ -204,7 +217,8 @@ const addInputField = (el) => {
             .filter(op => op.textContent !== 'isNull')
             .map(op => {
                 op.hidden = false
-            console.log(op.textContent)})
+                console.log(op.textContent)
+            })
         Array.from(operator.children)
             .filter(op => op.textContent === 'isNull')
             .map(op => op.hidden = true)
@@ -253,6 +267,10 @@ const showList = (el) => {
     if (el.value === '=in=' || el.value === '=out=') {
         input.value = '()'
     }
+    input.hidden = false
+    if (el.value === '==null') {
+        input.hidden = true
+    }
 }
 
 const addFilters = (el) => {
@@ -280,7 +298,7 @@ const addFilters = (el) => {
                     children[i].setAttribute('placeholder', '')
                     children[i].setAttribute('type', 'text')
                 }
-                if (children[i].id.startsWith('addSelect')){
+                if (children[i].id.startsWith('addSelect')) {
                     children[i].hidden = true
                     children[i].innerHTML = ''
                     children[i].value = ''
@@ -381,4 +399,36 @@ const combineFilters = () => {
 
 const resetForm = () => {
     location.reload()
+}
+
+const popups = document.querySelectorAll('.popup')
+
+for (let i = 0; i < popups.length; i++) {
+    popups[i].onmouseover = (el) => {
+        el.target.classList.add('show')
+    }
+    popups[i].onmouseout = (el) => {
+        el.target.classList.remove('show')
+    }
+}
+
+const copyCurl = document.querySelector('#copyCurl')
+    copyCurl.onclick = el => {
+    /* Get the text field */
+   const copyText = document.querySelector('#basic-url')
+
+    /* Select the text field */
+    copyText.select()
+
+    /* Copy the text inside the text field */
+    document.execCommand("copy")
+
+    el.target.style.display = 'none'
+    el.target.nextElementSibling.hidden = false
+
+    setTimeout(() => {
+        el.target.style.display = 'block'
+        el.target.nextElementSibling.hidden = true
+    }, 1000)
+
 }
