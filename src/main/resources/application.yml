@@ -11,6 +11,18 @@ access:
 
 base:
   url: https://demo.kyriba.com/gateway/api
+  api:
+    name: accounts
+
+#List of available API
+list:
+  apis:
+    - accounts
+    - bank-branches
+    - bank-groups
+    - banks
+    - companies
+    - users
 
 #A path that corresponds to get list of models endpoint. base.api.name isn't needed changing. It is generated within a code.
 request:
@@ -39,6 +51,7 @@ api:
       - closingDate
       - activeStatus
       - statementIdentifier
+      - accountAvailableForPayments
 
     bank-branches:
       - code
@@ -114,6 +127,10 @@ enums:
         activeStatus:
           - OPENED
           - CLOSED
+        accountAvailableForPayments:
+          - true
+          - false
+
 
       bank-groups:
         intermediary:

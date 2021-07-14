@@ -11,7 +11,7 @@
  */
 
 
-package com.kyriba.sample;
+package com.kyriba.sample.utils;
 
 public class Pair {
     private String name = "";

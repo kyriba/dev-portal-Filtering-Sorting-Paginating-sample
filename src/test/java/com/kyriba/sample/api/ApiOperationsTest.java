@@ -13,8 +13,7 @@
 
 package com.kyriba.sample.api;
 
-import com.kyriba.sample.ApiException;
-import com.kyriba.sample.model.PageOfSearchModel;
+import com.kyriba.sample.exception.ApiException;
 
 import org.junit.Test;
 import org.junit.Ignore;
@@ -46,7 +45,7 @@ public class ApiOperationsTest {
         Integer pageLimit = null;
         Integer pageOffset = null;
         List<String> sort = null;
-        PageOfSearchModel response = api.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
+        String response = api.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
 
         // TODO: test validations
     }

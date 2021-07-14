@@ -11,13 +11,16 @@
  */
 
 
-package com.kyriba.sample;
+package com.kyriba.sample.api;
 
-import com.kyriba.sample.auth.ApiKeyAuth;
 import com.kyriba.sample.auth.Authentication;
-import com.kyriba.sample.auth.HttpBasicAuth;
 import com.kyriba.sample.auth.OAuth;
+import com.kyriba.sample.exception.ApiException;
 import com.kyriba.sample.exception.InvalidTokenException;
+import com.kyriba.sample.utils.JSON;
+import com.kyriba.sample.utils.Pair;
+import com.kyriba.sample.utils.ProgressRequestBody;
+import com.kyriba.sample.utils.StringUtil;
 import com.squareup.okhttp.*;
 import com.squareup.okhttp.internal.http.HttpMethod;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
@@ -28,7 +31,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
-import org.threeten.bp.format.DateTimeFormatter;
 
 import javax.net.ssl.*;
 import java.io.File;
@@ -47,10 +49,8 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.text.DateFormat;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,11 +63,6 @@ public class ApiClient {
     private String tempFolderPath = null;
 
     private Map<String, Authentication> authentications;
-
-    private DateFormat dateFormat;
-    private DateFormat datetimeFormat;
-    private boolean lenientDatetimeFormat;
-    private int dateLength;
 
     private InputStream sslCaCert;
     private boolean verifyingSsl;
@@ -221,34 +216,6 @@ public class ApiClient {
         return this;
     }
 
-    public DateFormat getDateFormat() {
-        return dateFormat;
-    }
-
-    public ApiClient setDateFormat(DateFormat dateFormat) {
-        this.json.setDateFormat(dateFormat);
-        return this;
-    }
-
-    public ApiClient setSqlDateFormat(DateFormat dateFormat) {
-        this.json.setSqlDateFormat(dateFormat);
-        return this;
-    }
-
-    public ApiClient setOffsetDateTimeFormat(DateTimeFormatter dateFormat) {
-        this.json.setOffsetDateTimeFormat(dateFormat);
-        return this;
-    }
-
-    public ApiClient setLocalDateFormat(DateTimeFormatter dateFormat) {
-        this.json.setLocalDateFormat(dateFormat);
-        return this;
-    }
-
-    public ApiClient setLenientOnJson(boolean lenientOnJson) {
-        this.json.setLenientOnJson(lenientOnJson);
-        return this;
-    }
 
     /**
      * Get authentications (key: authentication name, value: authentication).
@@ -269,65 +236,6 @@ public class ApiClient {
         return authentications.get(authName);
     }
 
-    /**
-     * Helper method to set username for the first HTTP basic authentication.
-     *
-     * @param username Username
-     */
-    public void setUsername(String username) {
-        for (Authentication auth : authentications.values()) {
-            if (auth instanceof HttpBasicAuth) {
-                ((HttpBasicAuth) auth).setUsername(username);
-                return;
-            }
-        }
-        throw new RuntimeException("No HTTP basic authentication configured!");
-    }
-
-    /**
-     * Helper method to set password for the first HTTP basic authentication.
-     *
-     * @param password Password
-     */
-    public void setPassword(String password) {
-        for (Authentication auth : authentications.values()) {
-            if (auth instanceof HttpBasicAuth) {
-                ((HttpBasicAuth) auth).setPassword(password);
-                return;
-            }
-        }
-        throw new RuntimeException("No HTTP basic authentication configured!");
-    }
-
-    /**
-     * Helper method to set API key value for the first API key authentication.
-     *
-     * @param apiKey API key
-     */
-    public void setApiKey(String apiKey) {
-        for (Authentication auth : authentications.values()) {
-            if (auth instanceof ApiKeyAuth) {
-                ((ApiKeyAuth) auth).setApiKey(apiKey);
-                return;
-            }
-        }
-        throw new RuntimeException("No API key authentication configured!");
-    }
-
-    /**
-     * Helper method to set API key prefix for the first API key authentication.
-     *
-     * @param apiKeyPrefix API key prefix
-     */
-    public void setApiKeyPrefix(String apiKeyPrefix) {
-        for (Authentication auth : authentications.values()) {
-            if (auth instanceof ApiKeyAuth) {
-                ((ApiKeyAuth) auth).setApiKeyPrefix(apiKeyPrefix);
-                return;
-            }
-        }
-        throw new RuntimeException("No API key authentication configured!");
-    }
 
     /**
      * Helper method to set access token for the first OAuth2 authentication.
@@ -394,95 +302,6 @@ public class ApiClient {
             }
         }
         this.debugging = debugging;
-        return this;
-    }
-
-    /**
-     * The path of temporary folder used to store downloaded files from endpoints
-     * with file response. The default value is <code>null</code>, i.e. using
-     * the system's default tempopary folder.
-     *
-     * @return Temporary folder path
-     * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/io/File.html#createTempFile">createTempFile</a>
-     */
-    public String getTempFolderPath() {
-        return tempFolderPath;
-    }
-
-    /**
-     * Set the temporary folder path (for downloading files)
-     *
-     * @param tempFolderPath Temporary folder path
-     * @return ApiClient
-     */
-    public ApiClient setTempFolderPath(String tempFolderPath) {
-        this.tempFolderPath = tempFolderPath;
-        return this;
-    }
-
-    /**
-     * Get connection timeout (in milliseconds).
-     *
-     * @return Timeout in milliseconds
-     */
-    public int getConnectTimeout() {
-        return httpClient.getConnectTimeout();
-    }
-
-    /**
-     * Sets the connect timeout (in milliseconds).
-     * A value of 0 means no timeout, otherwise values must be between 1 and
-     * {@link Integer#MAX_VALUE}.
-     *
-     * @param connectionTimeout connection timeout in milliseconds
-     * @return Api client
-     */
-    public ApiClient setConnectTimeout(int connectionTimeout) {
-        httpClient.setConnectTimeout(connectionTimeout, TimeUnit.MILLISECONDS);
-        return this;
-    }
-
-    /**
-     * Get read timeout (in milliseconds).
-     *
-     * @return Timeout in milliseconds
-     */
-    public int getReadTimeout() {
-        return httpClient.getReadTimeout();
-    }
-
-    /**
-     * Sets the read timeout (in milliseconds).
-     * A value of 0 means no timeout, otherwise values must be between 1 and
-     * {@link Integer#MAX_VALUE}.
-     *
-     * @param readTimeout read timeout in milliseconds
-     * @return Api client
-     */
-    public ApiClient setReadTimeout(int readTimeout) {
-        httpClient.setReadTimeout(readTimeout, TimeUnit.MILLISECONDS);
-        return this;
-    }
-
-    /**
-     * Get write timeout (in milliseconds).
-     *
-     * @return Timeout in milliseconds
-     */
-    public int getWriteTimeout() {
-        return httpClient.getWriteTimeout();
-    }
-
-    /**
-     * Sets the write timeout (in milliseconds).
-     * A value of 0 means no timeout, otherwise values must be between 1 and
-     * {@link Integer#MAX_VALUE}.
-     *
-     * @param writeTimeout connection timeout in milliseconds
-     * @return Api client
-     */
-    public ApiClient setWriteTimeout(int writeTimeout) {
-        httpClient.setWriteTimeout(writeTimeout, TimeUnit.MILLISECONDS);
         return this;
     }
 
@@ -667,68 +486,6 @@ public class ApiClient {
     }
 
     /**
-     * Deserialize response body to Java object, according to the return type and
-     * the Content-Type response header.
-     *
-     * @param <T>        Type
-     * @param response   HTTP response
-     * @param returnType The type of the Java object
-     * @return The deserialized Java object
-     * @throws ApiException If fail to deserialize response body, i.e. cannot read response body
-     *                      or the Content-Type of the response is not supported.
-     */
-    @SuppressWarnings("unchecked")
-    public <T> T deserialize(Response response, Type returnType) throws ApiException {
-        if (response == null || returnType == null) {
-            return null;
-        }
-
-        if ("byte[]".equals(returnType.toString())) {
-            // Handle binary response (byte array).
-            try {
-                return (T) response.body().bytes();
-            } catch (IOException e) {
-                throw new ApiException(e);
-            }
-        } else if (returnType.equals(File.class)) {
-            // Handle file downloading.
-            return (T) downloadFileFromResponse(response);
-        }
-
-        String respBody;
-        try {
-            if (response.body() != null)
-                respBody = response.body().string();
-            else
-                respBody = null;
-        } catch (IOException e) {
-            throw new ApiException(e);
-        }
-
-        if (respBody == null || "".equals(respBody)) {
-            return null;
-        }
-
-        String contentType = response.headers().get("Content-Type");
-        if (contentType == null) {
-            // ensuring a default content type
-            contentType = "application/json";
-        }
-        if (isJsonMime(contentType)) {
-            return json.deserialize(respBody, returnType);
-        } else if (returnType.equals(String.class)) {
-            // Expecting string, return the raw response body.
-            return (T) respBody;
-        } else {
-            throw new ApiException(
-                    "Content type \"" + contentType + "\" is not supported for type: " + returnType,
-                    response.code(),
-                    response.headers().toMultimap(),
-                    respBody);
-        }
-    }
-
-    /**
      * Serialize the given Java object into request body according to the object's
      * class and the request Content-Type.
      *
@@ -822,12 +579,11 @@ public class ApiClient {
     /**
      * {@link #execute(Call, Type)}
      *
-     * @param <T>  Type
      * @param call An instance of the Call object
      * @return ApiResponse&lt;T&gt;
      * @throws ApiException If fail to execute the call
      */
-    public <T> ApiResponse<T> execute(Call call) throws ApiException {
+    public ApiResponse<String> execute(Call call) throws ApiException {
         return execute(call, null);
     }
 
@@ -835,91 +591,35 @@ public class ApiClient {
      * Execute HTTP call and deserialize the HTTP response body into the given return type.
      *
      * @param returnType The return type used to deserialize HTTP response body
-     * @param <T>        The return type corresponding to (same with) returnType
      * @param call       Call
      * @return ApiResponse object containing response status, headers and
      * data, which is a Java object deserialized from response body and would be null
      * when returnType is null.
      * @throws ApiException If fail to execute the call
      */
-    public <T> ApiResponse<T> execute(Call call, Type returnType) throws ApiException {
+    public ApiResponse<String> execute(Call call, Type returnType) throws ApiException {
         try {
             Response response = call.execute();
-            T data = handleResponse(response, returnType);
-            return new ApiResponse<T>(response.code(), response.headers().toMultimap(), data);
+            String data = handleResponse(response, returnType);
+            return new ApiResponse<String>(response.code(), response.headers().toMultimap(), data);
         } catch (IOException e) {
             throw new ApiException(e);
         }
     }
 
-    /**
-     * {@link #executeAsync(Call, Type, ApiCallback)}
-     *
-     * @param <T>      Type
-     * @param call     An instance of the Call object
-     * @param callback ApiCallback&lt;T&gt;
-     */
-    public <T> void executeAsync(Call call, ApiCallback<T> callback) {
-        executeAsync(call, null, callback);
-    }
-
-    /**
-     * Execute HTTP call asynchronously.
-     *
-     * @param <T>        Type
-     * @param call       The callback to be executed when the API call finishes
-     * @param returnType Return type
-     * @param callback   ApiCallback
-     * @see #execute(Call, Type)
-     */
-    @SuppressWarnings("unchecked")
-    public <T> void executeAsync(Call call, final Type returnType, final ApiCallback<T> callback) {
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                callback.onFailure(new ApiException(e), 0, null);
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                T result;
-                try {
-                    result = (T) handleResponse(response, returnType);
-                } catch (ApiException e) {
-                    callback.onFailure(e, response.code(), response.headers().toMultimap());
-                    return;
-                }
-                callback.onSuccess(result, response.code(), response.headers().toMultimap());
-            }
-        });
-    }
 
     /**
      * Handle the given response, return the deserialized object when the response is successful.
      *
-     * @param <T>        Type
      * @param response   Response
      * @param returnType Return type
      * @return Type
      * @throws ApiException If the response has a unsuccessful status code or
      *                      fail to deserialize the response body
      */
-    public <T> T handleResponse(Response response, Type returnType) throws ApiException {
+    public String handleResponse(Response response, Type returnType) throws ApiException, IOException {
         if (response.isSuccessful()) {
-            if (returnType == null || response.code() == 204) {
-                // returning null if the returnType is not defined,
-                // or the status code is 204 (No Content)
-                if (response.body() != null) {
-                    try {
-                        response.body().close();
-                    } catch (IOException e) {
-                        throw new ApiException(response.message(), e, response.code(), response.headers().toMultimap());
-                    }
-                }
-                return null;
-            } else {
-                return deserialize(response, returnType);
-            }
+            return response.body().string();
         } else {
             String respBody = null;
             if (response.body() != null) {

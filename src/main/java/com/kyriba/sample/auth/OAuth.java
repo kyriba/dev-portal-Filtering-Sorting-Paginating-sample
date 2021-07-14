@@ -13,7 +13,7 @@
 
 package com.kyriba.sample.auth;
 
-import com.kyriba.sample.Pair;
+import com.kyriba.sample.utils.Pair;
 
 import java.util.List;
 import java.util.Map;

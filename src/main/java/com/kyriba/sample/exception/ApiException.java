@@ -11,7 +11,7 @@
  */
 
 
-package com.kyriba.sample;
+package com.kyriba.sample.exception;
 
 import java.util.List;
 import java.util.Map;

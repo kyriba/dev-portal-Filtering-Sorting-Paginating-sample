@@ -1,7 +1,7 @@
 package com.kyriba.sample.service.impl;
 
 import com.kyriba.sample.config.AvailableValuesConfig;
-import org.springframework.beans.factory.annotation.Value;
+import com.kyriba.sample.config.InitialAPIBean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,12 +10,11 @@ import java.util.Map;
 @Service
 public class AvailableValuesService {
     private Map<String, Map<String, List<String>>> values;
+    private InitialAPIBean bean;
 
-    @Value("${base.api.name}")
-    private String apiName;
-
-    public AvailableValuesService(AvailableValuesConfig availableValuesConfig) {
+    public AvailableValuesService(AvailableValuesConfig availableValuesConfig, InitialAPIBean bean) {
         this.values = availableValuesConfig.getValues();
+        this.bean = bean;
     }
 
     public Map<String, Map<String, List<String>>> getValues() {
@@ -27,6 +26,6 @@ public class AvailableValuesService {
     }
 
     public Map<String, List<String>> getValuesForCurrentApi() {
-        return values.get(apiName);
+        return values.get(bean.getApiName());
     }
 }

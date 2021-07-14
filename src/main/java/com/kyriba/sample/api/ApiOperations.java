@@ -13,32 +13,33 @@
 
 package com.kyriba.sample.api;
 
-import com.google.gson.reflect.TypeToken;
-import com.kyriba.sample.*;
-import com.kyriba.sample.model.PageOfSearchModel;
-import org.springframework.beans.factory.annotation.Value;
+import com.kyriba.sample.config.InitialAPIBean;
+import com.kyriba.sample.exception.ApiException;
+import com.kyriba.sample.utils.Pair;
+import com.kyriba.sample.utils.ProgressRequestBody;
+import com.kyriba.sample.utils.ProgressResponseBody;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class ApiOperations<T> {
+public class ApiOperations {
     private ApiClient apiClient;
 
-    @Value("${request.mapping}")
     private String requestMapping;
 
-    private final ApiUtils apiUtils;
+
+    private final InitialAPIBean bean;
 
 
-    public ApiOperations(ApiClient apiClient, ApiUtils apiUtils) {
+    public ApiOperations(ApiClient apiClient,  InitialAPIBean bean) {
         this.apiClient = apiClient;
-        this.apiUtils = apiUtils;
+        this.bean = bean;
+        requestMapping = "/v1/" + bean.getApiName();
     }
 
     public ApiClient getApiClient() {
@@ -132,8 +133,8 @@ public class ApiOperations<T> {
      * @return PageOfAccountSearchModel
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public PageOfSearchModel<T> readAccountsUsingGET1(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
-        ApiResponse<PageOfSearchModel<T>> resp = readAccountsUsingGET1WithHttpInfo(activeStatus, filter, pageLimit, pageOffset, sort);
+    public String readAccountsUsingGET1(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
+        ApiResponse<String> resp = readAccountsUsingGET1WithHttpInfo(activeStatus, filter, pageLimit, pageOffset, sort);
         return resp.getData();
     }
 
@@ -149,52 +150,9 @@ public class ApiOperations<T> {
      * @return ApiResponse&lt;PageOfAccountSearchModel&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<PageOfSearchModel<T>> readAccountsUsingGET1WithHttpInfo(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
+    public ApiResponse<String> readAccountsUsingGET1WithHttpInfo(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) throws ApiException {
         com.squareup.okhttp.Call call = readAccountsUsingGET1ValidateBeforeCall(activeStatus, filter, pageLimit, pageOffset, sort, null, null);
-        Type localVarReturnType = TypeToken.getParameterized(new TypeToken<PageOfSearchModel<T>>() {
-        }.getRawType(), TypeToken.get(apiUtils.getSearchClass()).getRawType()).getType();
-        return apiClient.execute(call, localVarReturnType);
-    }
-
-    /**
-     * List accounts.yaml (all accounts.yaml or a selection of accounts.yaml). (asynchronously)
-     * An empty list is returned if no accounts.yaml are available. The following fields can be used for filter and sort: - **code** - **uuid** - **description** - **company.uuid** - **company.code** - **branch.uuid** - **branch.code** - **bank.uuid** - **bank.code** - **currency.uuid** - **currency.code** - **country.code** - **accountType** available values &#x3D; {BANK_ACCOUNT,INTERCOMPANY_ACCOUNT,OTHER_ACCOUNT,SHARED_ACCOUNT} - **banCode** - **creationDate** - **updateDate** - **closingDate** - **activeStatus** available values &#x3D; {OPENED,CLOSED} - **statementIdentifier**
-     *
-     * @param activeStatus activeStatus (optional)
-     * @param filter       Filter represents search query on RSQL language. The fields which can be used in filter query are defined in description for endpoint.  The following RSQL comparing operators are supported: &#x3D;&#x3D; : Evaluates to true if the attribute is equal to the value. !&#x3D; : Evaluates to true if the attribute is not equal to the value. &#x3D;in&#x3D; : Evaluates to true if the attribute exactly matches any of the values in the list. &#x3D;out&#x3D; : Evaluates to true if the attribute does not match any of the values in the list. &#x3D;&#x3D;ABC* : Similar to SQL like &#39;ABC%. &#x3D;&#x3D;*ABC : Similar to SQL like &#39;%ABC. &#x3D;&#x3D;*ABC* : Similar to SQL like &#39;%ABC%. &#x3D;lt&#x3D; : Evaluates to true if the attribute is less than the value. &#x3D;gt&#x3D; : Evaluates to true if the attribute is greater than the value. &#x3D;le&#x3D; : Evaluates to true if the attribute is less than or equal to the value. &#x3D;ge&#x3D; : Evaluates to true if the attribute is greater than or equal to the value.  Logical Operators: RSQL expression is composed of one or more comparisons, related to each other with logical operators: Logical AND &#39;**;**&#39; or &#39;**and**&#39; Logical OR &#39;**,**&#39; or &#39;**or**&#39;.  Argument can be a single value, or multiple values in parenthesis separated by comma. Value that doesn’t contain any reserved character or a white space can be unquoted, other arguments must be enclosed in single or double quotes. (optional)
-     * @param pageLimit    Limit the number of records per page. (optional)
-     * @param pageOffset   Page Offset means the number of records you want to skip before starting reading. (optional)
-     * @param sort         Specify the comma-separated list of fields used to order the records. By default, ascending ordering is used. Example: **-code** means descending order by field {code}. (optional)
-     * @param callback     The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     */
-    public com.squareup.okhttp.Call readAccountsUsingGET1Async(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort, final ApiCallback<PageOfSearchModel> callback) throws ApiException {
-
-        ProgressResponseBody.ProgressListener progressListener = null;
-        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
-
-        if (callback != null) {
-            progressListener = new ProgressResponseBody.ProgressListener() {
-                @Override
-                public void update(long bytesRead, long contentLength, boolean done) {
-                    callback.onDownloadProgress(bytesRead, contentLength, done);
-                }
-            };
-
-            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
-                @Override
-                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
-                    callback.onUploadProgress(bytesWritten, contentLength, done);
-                }
-            };
-        }
-
-        com.squareup.okhttp.Call call = readAccountsUsingGET1ValidateBeforeCall(activeStatus, filter, pageLimit, pageOffset, sort, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<PageOfSearchModel>() {
-        }.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
-        return call;
+        return apiClient.execute(call);
     }
 
     public String getRequestMapping() {

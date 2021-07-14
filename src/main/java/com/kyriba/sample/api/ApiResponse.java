@@ -11,7 +11,7 @@
  */
 
 
-package com.kyriba.sample;
+package com.kyriba.sample.api;
 
 import java.util.List;
 import java.util.Map;

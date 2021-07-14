@@ -11,7 +11,7 @@
  */
 
 
-package com.kyriba.sample;
+package com.kyriba.sample.utils;
 
 import com.google.gson.*;
 import com.google.gson.internal.bind.util.ISO8601Utils;

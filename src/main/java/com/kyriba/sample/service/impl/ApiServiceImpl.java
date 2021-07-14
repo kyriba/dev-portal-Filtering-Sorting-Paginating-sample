@@ -1,11 +1,10 @@
 package com.kyriba.sample.service.impl;
 
-import com.kyriba.sample.ApiClient;
-import com.kyriba.sample.ApiException;
+import com.kyriba.sample.api.ApiClient;
+import com.kyriba.sample.exception.ApiException;
 import com.kyriba.sample.api.ApiOperations;
 import com.kyriba.sample.exception.BadRequestException;
 import com.kyriba.sample.exception.InvalidTokenException;
-import com.kyriba.sample.model.PageOfSearchModel;
 import com.kyriba.sample.service.ApiService;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
@@ -14,7 +13,6 @@ import org.apache.oltu.oauth2.client.response.OAuthAccessTokenResponse;
 import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +21,9 @@ import java.util.Base64;
 import java.util.List;
 
 @Service
-public class ApiServiceImpl<T> implements ApiService<T> {
+public class ApiServiceImpl implements ApiService {
 
-    private final ApiOperations<T> apiOperations;
+    private final ApiOperations apiOperations;
     @Value("${access.token.url}")
     String tokenUrl;
     @Value("${client.id}")
@@ -34,7 +32,7 @@ public class ApiServiceImpl<T> implements ApiService<T> {
     String clientSecret;
 
 
-    public ApiServiceImpl(@Qualifier("apiOperations") ApiOperations<T> apiOperations) {
+    public ApiServiceImpl(ApiOperations apiOperations) {
         this.apiOperations = apiOperations;
     }
 
@@ -45,8 +43,8 @@ public class ApiServiceImpl<T> implements ApiService<T> {
 
 
     @Override
-    public PageOfSearchModel<T> getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) {
-        PageOfSearchModel<T> result;
+    public String getAllAccounts(String activeStatus, String filter, Integer pageLimit, Integer pageOffset, List<String> sort) {
+        String result;
         try {
             result = apiOperations.readAccountsUsingGET1(activeStatus, filter, pageLimit, pageOffset, sort);
         } catch (InvalidTokenException e) {
