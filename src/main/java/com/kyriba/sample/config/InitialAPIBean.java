@@ -6,6 +6,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class InitialAPIBean {
 
-    private String apiName;
+    private final String apiName;
 
    private final ApiConfig apiConfig;
 
@@ -28,23 +29,27 @@ public class InitialAPIBean {
 
     private String getName() {
         Scanner sc = new Scanner(System.in);
-        List<String> list = apiConfig.getApis();
-        String name;
+        List<String> apis = apiConfig.getApis();
+        Map<String, String> list = apis.
+                stream()
+                .collect(Collectors.toMap(e -> String.valueOf(apis.indexOf(e) + 1), e -> e));
+        String input;
         do {
-            System.out.println(list.stream()
-                    .collect(Collectors.joining("\n - ", "Please enter api name from list: \n - ", "")));
-            name = sc.nextLine();
-            String input = name;
-            name = name.trim();
-            if (name.startsWith("-")) {
-                name = name.substring(1);
+            System.out.println(apis.stream()
+                    .map(e -> e = apis.indexOf(e) + 1 + ". " + e)
+                    .collect(Collectors.joining("\n", "\nPlease enter api name or order number from list: \n", "")));
+            input = sc.nextLine();
+            input = input.trim();
+            if(input.matches("[0-9]+")){
+                if (!list.containsKey(input)) {
+                    System.out.println("Api with order number " + input + " not found.");
+                }
             }
-            name = name.trim();
-            if (!list.contains(name)) {
+            else if (!list.containsValue(input)) {
                 System.out.println("Api with name " + input + " not found.");
             }
         }
-        while (!list.contains(name));
-        return name;
+        while (!list.containsKey(input) && !list.containsValue(input));
+        return input.matches("[0-9]+") ? list.get(input) : input;
     }
 }

@@ -34,7 +34,7 @@ cd dev-portal-Filtering-Sorting-Paginating-sample
 
 Build project:
 ```shell
-gradle build
+gradle clean build
 ```
 
 And execute jar file: 
@@ -60,3 +60,9 @@ If everything was done accordingly with provided steps, the result should look a
 
 
 To terminate application press Ctrl + C and execute Y.
+
+application.yml file is available to adding new API, filters and available values for filters.
+
+> ⚠️  _If application.yml was modified after application had been built it is also needed rebuilding. Execute gradle clean build stage again._  
+
+
