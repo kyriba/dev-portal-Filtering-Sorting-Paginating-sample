@@ -44,7 +44,7 @@ java -jar "build/libs/filtering-sorting-pagination-1.0.0.jar"
 ```
 > ⚠️  _Please notice that the path to your local directory is provided in MacOS/Unix format. Windows is slash-sensitive, so if you are using a Windows system, replace "/" with "\\"._
 
-Choose the API from the provided list in the Terminal, by typing the exact name and pressing "Enter" button. Names are case-sensitive, make sure you write them in lower-case.
+Choose the API from the provided list in the Terminal, by typing the number of the item on the list or by providing the name of the API. Name are case-sensitive, make sure you write them in lower-case and not introduce any additional characters.
 
 Go to the link:
 
@@ -61,8 +61,8 @@ If everything was done accordingly with provided steps, the result should look a
 
 To terminate application press Ctrl + C and execute Y.
 
-application.yml file is available to adding new API, filters and available values for filters.
+Note that new APIs, filters and values for them can be added to the application.yml file.
 
-> ⚠️  _If application.yml was modified after application had been built it is also needed rebuilding. Execute gradle clean build stage again._  
+> ⚠️  _If application.yml was modified after application had been built, it needs to be rebuilt. In that case, execute gradle clean build again._  
 
 
