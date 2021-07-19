@@ -11,8 +11,7 @@ access:
 
 base:
   url: https://demo.kyriba.com/gateway/api
-  api:
-    name: accounts
+
 
 #List of available API
 list:
@@ -23,10 +22,6 @@ list:
     - banks
     - companies
     - users
-
-#A path that corresponds to get list of models endpoint. base.api.name isn't needed changing. It is generated within a code.
-request:
-  mapping: /v1/${base.api.name}
 
 #Lists of columns that can be used for filtering and sorting.
 api:

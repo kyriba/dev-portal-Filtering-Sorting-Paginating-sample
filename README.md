@@ -46,6 +46,8 @@ java -jar "build/libs/filtering-sorting-pagination-1.0.0.jar"
 
 Choose the API from the provided list in the Terminal, by typing the number of the item on the list or by providing the name of the API. Name are case-sensitive, make sure you write them in lower-case and not introduce any additional characters.
 
+![list.png](list.png)
+
 Go to the link:
 
 ```shell
