@@ -16,17 +16,17 @@ base:
 #List of available API
 list:
   apis:
-    - accounts
-    - bank-branches
-    - bank-groups
-    - banks
-    - companies
-    - users
+    - /v1/accounts
+    - /v1/bank-branches
+    - /v1/bank-groups
+    - /v1/banks
+    - /v1/companies
+    - /v1/users
 
 #Lists of columns that can be used for filtering and sorting.
 api:
   filters:
-    accounts:
+    /v1/accounts:
       - code
       - uuid
       - description
@@ -58,7 +58,7 @@ api:
       - address.country.uuid
       - bic
 
-    bank-groups:
+    /v1/bank-groups:
       - code
       - uuid
       - description
@@ -67,7 +67,7 @@ api:
       - intermediary
       - counterparty
 
-    banks:
+    /v1/banks:
       - code
       - uuid
       - description
@@ -76,7 +76,7 @@ api:
       - countryCode
       - intercompany
 
-    companies:
+    /v1/companies:
       - code
       - uuid
       - description1
@@ -90,7 +90,7 @@ api:
       - address.country.code
       - address.country.uuid
 
-    users:
+    /v1/users:
       - code
       - uuid
       - interfaceCode
@@ -113,7 +113,7 @@ api:
 enums:
   available:
     values:
-      accounts:
+      /v1/accounts:
         accountType:
           - BANK_ACCOUNT
           - INTERCOMPANY_ACCOUNT
@@ -127,7 +127,7 @@ enums:
           - false
 
 
-      bank-groups:
+      /v1/bank-groups:
         intermediary:
           - true
           - false
@@ -135,12 +135,12 @@ enums:
           - true
           - false
 
-      banks:
+      /v1/banks:
         intercompany:
           - true
           - false
 
-      users:
+      /v1/users:
         paymentAdministrator:
           - true
           - false

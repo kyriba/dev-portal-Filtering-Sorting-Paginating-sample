@@ -24,7 +24,7 @@
     <div class="panel panel-info request">
         <div class="panel-body" style="background-color: #d9edf7; padding: 0; user-select: none">
             <span class="btn btn-info" style="background-color: #1e90ff; background-image: none">GET</span>
-            <span th:text="'Get all ' + ${requestMapping.replace('/v1/', ' ').replace('-', ' ')}"></span>
+            <span th:text="'Get all ' + ${requestMapping.replaceAll('/v[0-9]+/', ' ').replaceAll('-', ' ')}"></span>
             <button onclick="sendFilters()" class="btn"
                     style=" background-color: #1e90ff; color: aliceblue; float: right">Send
             </button>

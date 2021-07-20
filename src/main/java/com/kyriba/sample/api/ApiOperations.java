@@ -39,7 +39,7 @@ public class ApiOperations {
     public ApiOperations(ApiClient apiClient,  InitialAPIBean bean) {
         this.apiClient = apiClient;
         this.bean = bean;
-        requestMapping = "/v1/" + bean.getApiName();
+        requestMapping = bean.getApiName();
     }
 
     public ApiClient getApiClient() {

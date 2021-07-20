@@ -19,7 +19,7 @@ public class FiltersService {
     }
 
     public List<String> getFilters() {
-        return this.filters.get(bean.getApiName());
+        return this.filters.get(bean.getApiName().replaceAll("/", ""));
     }
 
 }

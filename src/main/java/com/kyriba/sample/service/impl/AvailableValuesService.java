@@ -26,6 +26,6 @@ public class AvailableValuesService {
     }
 
     public Map<String, List<String>> getValuesForCurrentApi() {
-        return values.get(bean.getApiName());
+        return values.get(bean.getApiName().replaceAll("/", ""));
     }
 }
