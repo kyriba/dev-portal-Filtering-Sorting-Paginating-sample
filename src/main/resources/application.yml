@@ -48,7 +48,7 @@ api:
       - statementIdentifier
       - accountAvailableForPayments
 
-    bank-branches:
+    /v1/bank-branches:
       - code
       - uuid
       - description
