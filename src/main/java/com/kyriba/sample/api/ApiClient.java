@@ -106,7 +106,7 @@ public class ApiClient {
     /**
      * Set base path
      *
-     * @param basePath Base path of the URL (e.g https://demo.kyriba.com/gateway/api
+     * @param basePath Base path of the URL (e.g https://demo.us.treasury-factory.com/gateway/api
      * @return An instance of OkHttpClient
      */
     public ApiClient setBasePath(String basePath) {
